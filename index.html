@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전하영 · AI Engineer</title>
+<meta name="description" content="전하영 · 데이터로 듣고, 에이전트로 말하다 — AI/ML 엔지니어 포트폴리오 랜딩" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* ===================================================================
+     PALETTE — 버거킹 이미지에서 추출한 색만 사용
+     레이아웃/컴포넌트 형태는 start.litt.ly 를 따름
+  =================================================================== */
+  :root {
+    --cream:   #FBF3E2;   /* 메인 배경 (밝은 크림) */
+    --cream-2: #F1E4C6;   /* 보조 배경 (크림) */
+    --orange:  #EC4A22;
+    --red:     #C5122A;
+    --gold:    #F2A618;
+    --green:   #4C7A33;
+    --brown:   #3A2412;   /* 텍스트 / 다크 */
+    --brown-2: #7A5230;   /* 보조 텍스트 */
+    --brown-3: #A98a5e;   /* 흐린 텍스트 */
+    --line:    #E6D6B2;
+    --brand:   var(--orange);
+    --brand-soft: #FBE0D2;
+
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+    --radius: 22px;
+    --radius-sm: 16px;
+    --shadow: 0 12px 30px -14px rgba(58,36,18,.28);
+    --shadow-lg: 0 26px 60px -20px rgba(58,36,18,.4);
+    --maxw: 1140px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--brown); background: var(--cream); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  section { padding: 92px 0; }
+  .eyebrow { font-size: 16px; font-weight: 700; color: var(--orange); letter-spacing: .01em; }
+  h2.title { font-size: clamp(30px, 4.6vw, 50px); font-weight: 700; line-height: 1.15; letter-spacing: -.01em; margin: 10px 0 16px; }
+  .lead { font-size: clamp(17px, 2vw, 21px); color: var(--brown-2); }
+  .center { text-align: center; }
+
+  /* buttons (알약형) */
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-weight: 700; font-size: 17px; padding: 14px 28px; border-radius: 999px; transition: transform .15s, box-shadow .2s, background .2s; cursor: pointer; border: none; }
+  .btn-primary { background: var(--orange); color: var(--cream); box-shadow: 0 14px 26px -12px rgba(236,74,34,.6); }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--red); }
+  .btn-ghost { background: var(--cream); color: var(--brown); border: 2px solid var(--line); }
+  .btn-ghost:hover { background: var(--cream-2); }
+  .btn-lg { font-size: 19px; padding: 18px 40px; }
+
+  /* placeholder media (둥근 카드 + 이모지) */
+  .ph { border-radius: var(--radius); display: grid; place-items: center; color: #fff; font-weight: 700; position: relative; overflow: hidden; }
+  .ph .ph-emoji { font-size: clamp(40px, 9vw, 84px); }
+  .ph small { position: absolute; bottom: 10px; right: 14px; font-size: 12px; opacity: .8; font-weight: 700; }
+  .g-orange { background: linear-gradient(150deg,#F2691E,#EC4A22); }
+  .g-red    { background: linear-gradient(150deg,#E0392E,#C5122A); }
+  .g-gold   { background: linear-gradient(150deg,#F7BB3A,#F2A618); }
+  .g-green  { background: linear-gradient(150deg,#5E9540,#4C7A33); }
+  .g-brown  { background: linear-gradient(150deg,#5A3A1F,#3A2412); }
+
+  /* ===== HEADER ===== */
+  header.nav { position: sticky; top: 0; z-index: 100; background: rgba(251,243,226,.85); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .logo { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 24px; letter-spacing: -.01em; }
+  .logo .mark { width: 34px; height: 34px; border-radius: 11px; background: var(--orange); display: grid; place-items: center; color: var(--cream); font-size: 18px; }
+  .menu { display: flex; gap: 30px; font-size: 17px; font-weight: 700; color: var(--brown-2); }
+  .menu a:hover { color: var(--orange); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .nav-cta .login { font-size: 17px; font-weight: 700; color: var(--brown-2); }
+  .burger { display: none; font-size: 24px; background: none; border: none; cursor: pointer; color: var(--brown); }
+  @media (max-width: 880px){ .menu, .nav-cta .login { display: none; } .burger { display: block; } }
+
+  /* ===== HERO ===== */
+  .hero { padding: 78px 0 44px; text-align: center; background: radial-gradient(820px circle at 50% -12%, var(--brand-soft), transparent 60%); }
+  .hero h1 { font-size: clamp(40px, 7.4vw, 76px); font-weight: 700; line-height: 1.06; letter-spacing: -.02em; }
+  .rotor { display: inline-grid; height: 1.12em; overflow: hidden; vertical-align: bottom; }
+  .rotor span { color: var(--orange); animation: rot 8s infinite; }
+  @keyframes rot { 0%,20%{transform:translateY(0)} 25%,45%{transform:translateY(-100%)} 50%,70%{transform:translateY(-200%)} 75%,95%{transform:translateY(-300%)} 100%{transform:translateY(0)} }
+  .hero .lead { margin: 22px auto 30px; max-width: 580px; }
+  .hero-cards { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 54px; }
+  .hero-cards .ph { width: 168px; height: 224px; box-shadow: var(--shadow); }
+  .hero-cards .ph:nth-child(odd) { transform: rotate(-4deg); }
+  .hero-cards .ph:nth-child(even) { transform: rotate(4deg); margin-top: 18px; }
+  @media (max-width: 680px){ .hero-cards .ph { width: 132px; height: 176px; } }
+
+  /* ===== METRICS ===== */
+  .metrics { padding: 60px 0; }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+  .metric .n { font-size: clamp(30px, 4.6vw, 50px); font-weight: 700; line-height: 1; color: var(--orange); }
+  .metric:nth-child(2) .n { color: var(--green); }
+  .metric:nth-child(3) .n { color: var(--red); }
+  .metric:nth-child(4) .n { color: var(--gold); }
+  .metric .l { font-size: 15px; color: var(--brown-2); margin-top: 8px; font-weight: 700; }
+  @media (max-width: 700px){ .metric-grid { grid-template-columns: repeat(2,1fr); gap: 32px 16px; } }
+
+  /* ===== SPLIT ===== */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .split.rev .col-media { order: -1; }
+  @media (max-width: 820px){ .split { grid-template-columns: 1fr; gap: 32px; } .split.rev .col-media { order: 0; } }
+  .feature-list { margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+  .feature-list li { list-style: none; display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--brown); font-size: 17px; }
+  .feature-list .dot { width: 28px; height: 28px; border-radius: 9px; background: var(--brand-soft); color: var(--orange); display: grid; place-items: center; font-size: 15px; flex-shrink: 0; }
+  .pill-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .pill { background: var(--cream); border: 1px solid var(--line); border-radius: 16px; padding: 14px 20px; box-shadow: var(--shadow); }
+  .pill .pn { font-size: 24px; font-weight: 700; color: var(--orange); }
+  .pill .pl { font-size: 14px; color: var(--brown-2); }
+  .media-tall { height: 380px; box-shadow: var(--shadow); }
+  .bg-soft { background: var(--cream-2); }
+
+  /* ===== CAROUSEL ===== */
+  .row-scroll { display: flex; gap: 18px; overflow-x: auto; padding: 6px 24px 18px; margin: 0 -24px; scroll-snap-type: x mandatory; }
+  .row-scroll::-webkit-scrollbar { height: 8px; }
+  .row-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 999px; }
+  .fcard { scroll-snap-align: start; flex: 0 0 280px; background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
+  .fcard:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+  .fcard .ph { height: 150px; margin-bottom: 18px; }
+  .fcard h3 { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+  .fcard p { font-size: 15px; color: var(--brown-2); margin-top: 8px; }
+  .fcard .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .fcard .tags span { font-size: 13px; font-weight: 700; color: var(--orange); background: var(--brand-soft); padding: 3px 11px; border-radius: 999px; }
+
+  /* ===== PHONE SHOWCASE (masonry) ===== */
+  .showcase { columns: 3; column-gap: 26px; }
+  @media (max-width: 920px){ .showcase { columns: 2; } }
+  @media (max-width: 560px){ .showcase { columns: 1; } }
+  .phone {
+    break-inside: avoid; -webkit-column-break-inside: avoid;
+    display: block; margin: 0 0 26px;
+    background: var(--cream); border: 1px solid var(--line);
+    border-radius: 30px; overflow: hidden; box-shadow: var(--shadow);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .phone:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .phone-cover { height: 138px; display: grid; place-items: center; position: relative; }
+  .phone-cover .ce { font-size: 52px; }
+  .phone-cover .live { position: absolute; top: 12px; right: 12px; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #fff; background: rgba(0,0,0,.28); padding: 4px 10px; border-radius: 999px; }
+  .phone-body { padding: 0 20px 22px; text-align: center; }
+  .phone-ava { width: 62px; height: 62px; border-radius: 18px; margin: -31px auto 12px; display: grid; place-items: center; font-size: 28px; color: #fff; border: 4px solid var(--cream); box-shadow: var(--shadow); position: relative; }
+  .phone h3 { font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
+  .phone .cat { font-size: 13px; font-weight: 700; color: var(--orange); margin-top: 3px; }
+  .phone .chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0; }
+  .phone .chips span { font-size: 12px; font-weight: 700; color: var(--brown-2); background: var(--cream-2); border: 1px solid var(--line); padding: 3px 10px; border-radius: 999px; }
+  .phone .desc { font-size: 14px; color: var(--brown-2); line-height: 1.55; margin-bottom: 16px; }
+  .phone .visit { display: block; font-weight: 800; font-size: 15px; padding: 12px; border-radius: 14px; background: var(--brown); color: var(--cream); transition: background .2s; }
+  .phone:hover .visit { background: var(--orange); }
+
+  /* ===== LOGO MARQUEE ===== */
+  .marquee { overflow: hidden; padding: 12px 0; -webkit-mask-image: linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image: linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
+  .marquee-track { display: flex; gap: 16px; width: max-content; animation: slide 28s linear infinite; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  .logo-chip { display: flex; align-items: center; gap: 9px; background: var(--cream); border: 1px solid var(--line); border-radius: 999px; padding: 12px 24px; font-weight: 700; font-size: 16px; color: var(--brown-2); white-space: nowrap; }
+  .logo-chip .lo { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; color: #fff; font-size: 13px; }
+
+  /* ===== TESTIMONIALS ===== */
+  .tgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+  @media (max-width: 880px){ .tgrid { grid-template-columns: 1fr; } }
+  .tcard { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+  .tcard .quote { font-size: 19px; color: var(--brown); line-height: 1.6; }
+  .tcard .who { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .tcard .ava { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 20px; flex-shrink: 0; }
+  .tcard .who .nm { font-weight: 700; font-size: 16px; }
+  .tcard .who .rl { font-size: 14px; color: var(--brown-3); }
+
+  /* ===== FAQ ===== */
+  .faq { max-width: 760px; margin: 0 auto; }
+  details { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 24px; margin-bottom: 12px; background: var(--cream); }
+  details[open] { box-shadow: var(--shadow); }
+  summary { list-style: none; cursor: pointer; font-weight: 700; font-size: 19px; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary .pm { color: var(--orange); font-size: 26px; transition: transform .2s; flex-shrink: 0; }
+  details[open] summary .pm { transform: rotate(45deg); }
+  details .ans { padding: 0 0 22px; color: var(--brown-2); font-size: 16.5px; }
+
+  /* ===== FINAL CTA ===== */
+  .final { text-align: center; background: radial-gradient(720px circle at 50% 120%, var(--brand-soft), transparent 60%); }
+  .final h2 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; line-height: 1.12; letter-spacing: -.01em; }
+  .final .deco { display: flex; gap: 14px; justify-content: center; margin-top: 48px; flex-wrap: wrap; }
+  .final .deco .ph { width: 120px; height: 150px; box-shadow: var(--shadow); }
+
+  /* ===== FOOTER ===== */
+  footer.ft { background: var(--brown); color: #D8C39C; padding: 64px 0 40px; }
+  .ft-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+  @media (max-width: 760px){ .ft-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+  .ft h4 { font-size: 14px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+  .ft ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .ft ul a { font-size: 16px; color: #C9B086; }
+  .ft ul a:hover { color: var(--cream); }
+  .ft .logo { color: var(--cream); margin-bottom: 14px; }
+  .ft .logo .mark { background: var(--gold); color: var(--brown); }
+  .ft .blurb { font-size: 15px; color: #B49B70; max-width: 290px; }
+  .ft-social { display: flex; gap: 10px; margin-top: 18px; }
+  .ft-social a { width: 40px; height: 40px; border-radius: 50%; background: #5A3A1F; display: grid; place-items: center; font-size: 17px; }
+  .ft-social a:hover { background: var(--orange); }
+  .ft-legal { border-top: 1px solid #5A3D22; margin-top: 40px; padding-top: 24px; font-size: 13.5px; color: #9C7E54; line-height: 1.9; }
+
+  /* reveal */
+  .rv { opacity: 0; transform: translateY(22px); transition: opacity .6s, transform .6s; }
+  .rv.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top"><span class="mark">전</span>하영<span style="color:var(--orange)">.</span></a>
+    <nav class="menu">
+      <a href="#about">소개</a>
+      <a href="#features">역량</a>
+      <a href="#solutions">프로젝트</a>
+      <a href="#voices">평가</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="login" href="https://github.com/vosnuev" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="#contact">채용 문의하기</a>
+    </div>
+    <button class="burger" aria-label="menu" onclick="document.querySelector('.menu').scrollIntoView()">☰</button>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap">
+    <h1>데이터로 듣고,<br />
+      <span class="rotor"><span>
+        에이전트로 말하다<br>RAG로 답하다<br>시스템으로 풀다<br>제품으로 만들다
+      </span></span>
+    </h1>
+    <p class="lead">교사에서 AI 엔지니어로 — 현장의 문제를 정의하고, 데이터와 LLM으로 실제 동작하는 제품을 만드는 <b>전하영</b>입니다.</p>
+    <a class="btn btn-primary btn-lg" href="#solutions">프로젝트 보러가기 →</a>
+
+    <div class="hero-cards">
+      <div class="ph g-orange"><span class="ph-emoji">🤖</span><small>RAG · Agent</small></div>
+      <div class="ph g-red"><span class="ph-emoji">📊</span><small>Data</small></div>
+      <div class="ph g-green"><span class="ph-emoji">🏫</span><small>EdTech</small></div>
+      <div class="ph g-gold"><span class="ph-emoji">⚙️</span><small>자동화</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METRICS ===== -->
+<section class="metrics" id="about">
+  <div class="wrap">
+    <div class="metric-grid">
+      <div class="metric rv"><div class="n">388,918건</div><div class="l">앱 리뷰 크롤링 데이터셋 구축</div></div>
+      <div class="metric rv"><div class="n">80% → 5%</div><div class="l">출결 정보 누락율 개선</div></div>
+      <div class="metric rv"><div class="n">8+</div><div class="l">팀·개인 AI/데이터 프로젝트</div></div>
+      <div class="metric rv"><div class="n">5년 10개월</div><div class="l">현장 문제해결 경력</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT / STORY ===== -->
+<section class="bg-soft">
+  <div class="wrap split">
+    <div class="col-text rv">
+      <div class="eyebrow">ABOUT ME</div>
+      <h2 class="title">코드가 아니라<br />문제부터 봅니다</h2>
+      <p class="lead">4년의 교직은 행정 현장의 비효율을 정의하고 실제 적용 가능한 시스템을 만드는 테스트의 장이었습니다. "왜 이런 변화가 일어났는가"를 끝까지 추적하는 구조적 분석력이 저의 강점입니다.</p>
+      <ul class="feature-list">
+        <li><span class="dot">✓</span> 문제 정의부터 배포까지 전체 파이프라인 경험</li>
+        <li><span class="dot">✓</span> 데이터 수집·전처리·모델링·평가 전 과정 수행</li>
+        <li><span class="dot">✓</span> RAG·LLM Agent로 동작하는 제품 구현</li>
+      </ul>
+      <div class="pill-row">
+        <div class="pill"><div class="pn">4</div><div class="pl">의도적으로 맡은 새 역할</div></div>
+        <div class="pill"><div class="pn">0 → 1</div><div class="pl">현장 서비스 직접 배포</div></div>
+      </div>
+    </div>
+    <div class="col-media rv">
+      <div class="ph media-tall g-orange"><span class="ph-emoji">🧑‍🏫→🤖</span><small>교사 → AI 엔지니어</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPROACH ===== -->
+<section>
+  <div class="wrap split rev">
+    <div class="col-text rv">
+      <div class="eyebrow">HOW I WORK</div>
+      <h2 class="title">만들고 끝이 아니에요</h2>
+      <p class="lead">정량 지표로 모든 선택의 근거를 세웁니다. 혼동행렬·AUC-ROC·PR 곡선 등 다각도 지표로 모델 선정의 타당성을 입증하고, 리팩토링으로 보안·유지보수까지 보완합니다.</p>
+      <ul class="feature-list">
+        <li><span class="dot">📈</span> EDA·전처리 전략을 정량 비교로 결정</li>
+        <li><span class="dot">🎯</span> 임계값 조정·가중치 설정으로 실무 전략 제시</li>
+        <li><span class="dot">🔁</span> 흐름·구조 중심 학습 + 리팩토링 보완</li>
+      </ul>
+    </div>
+    <div class="col-media rv">
+      <div class="ph media-tall g-green"><span class="ph-emoji">📊</span><small>지표 기반 의사결정</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES CAROUSEL ===== -->
+<section class="bg-soft" id="features">
+  <div class="wrap center">
+    <div class="eyebrow rv">CAPABILITIES</div>
+    <h2 class="title rv">무엇이든 만들 수 있는 역량</h2>
+    <p class="lead rv">AI 서비스 전체 파이프라인을 다룹니다. 좌우로 넘겨보세요.</p>
+  </div>
+  <div class="wrap">
+    <div class="row-scroll">
+      <div class="fcard">
+        <div class="ph g-orange"><span class="ph-emoji">🤖</span></div>
+        <h3>AI / LLM</h3>
+        <p>RAG·Agentic RAG·GraphRAG 설계와 프롬프트 엔지니어링·파인튜닝.</p>
+        <div class="tags"><span>LangChain</span><span>LangGraph</span><span>Pinecone</span></div>
+      </div>
+      <div class="fcard">
+        <div class="ph g-red"><span class="ph-emoji">🧠</span></div>
+        <h3>ML / DL</h3>
+        <p>분류·예측 모델링과 검증. 피처 엔지니어링과 임계값 전략.</p>
+        <div class="tags"><span>PyTorch</span><span>XGBoost</span><span>CatBoost</span></div>
+      </div>
+      <div class="fcard">
+        <div class="ph g-gold"><span class="ph-emoji">📊</span></div>
+        <h3>데이터 분석</h3>
+        <p>EDA·전처리·시각화로 데이터 이면의 인과관계를 추적.</p>
+        <div class="tags"><span>Pandas</span><span>NumPy</span><span>Matplotlib</span></div>
+      </div>
+      <div class="fcard">
+        <div class="ph g-green"><span class="ph-emoji">⚙️</span></div>
+        <h3>백엔드 / 인프라</h3>
+        <p>API 서버 구축과 클라우드 배포, 데이터 파이프라인.</p>
+        <div class="tags"><span>FastAPI</span><span>Flask</span><span>Docker</span></div>
+      </div>
+      <div class="fcard">
+        <div class="ph g-brown"><span class="ph-emoji">🎨</span></div>
+        <h3>프론트엔드</h3>
+        <p>React·TypeScript 기반 UI와 PWA, 반응형 웹.</p>
+        <div class="tags"><span>React 19</span><span>TypeScript</span><span>Vite</span></div>
+      </div>
+      <div class="fcard">
+        <div class="ph g-orange"><span class="ph-emoji">🕷️</span></div>
+        <h3>데이터 수집</h3>
+        <p>크롤링으로 대체 데이터를 발굴하고 무결성을 검증.</p>
+        <div class="tags"><span>Selenium</span><span>BeautifulSoup</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS · PHONE SHOWCASE ===== -->
+<section id="solutions">
+  <div class="wrap center" style="margin-bottom:44px;">
+    <div class="eyebrow rv">PROJECTS</div>
+    <h2 class="title rv">프로젝트를 하나씩 담았어요</h2>
+    <p class="lead rv">각 카드를 누르면 코드·라이브 데모로 이동합니다.</p>
+  </div>
+  <div class="wrap">
+    <div class="showcase">
+
+      <a class="phone rv" href="https://app--school-connect-attendance-copy-bbf1457b.base44.app/" target="_blank" rel="noopener">
+        <div class="phone-cover g-orange"><span class="ce">🏫</span><span class="live">LIVE</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-red">🏫</div>
+          <h3>실시간 출결 공유 웹앱</h3>
+          <div class="cat">현장 문제해결 · 직접 배포</div>
+          <div class="chips"><span>웹앱</span><span>Cloud DB</span><span>배포</span></div>
+          <p class="desc">학부모가 입력한 출결이 교사 대시보드에 실시간 반영되는 웹앱. 43명 학급에 적용해 정보 누락율을 80%→5%로 줄였습니다.</p>
+          <span class="visit">라이브 데모 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://github.com/vosnuev/SKN28-3rd-1Team" target="_blank" rel="noopener">
+        <div class="phone-cover g-red"><span class="ce">🧭</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-orange">⚖️</div>
+          <h3>고령층 법률 상담 RAG</h3>
+          <div class="cat">SKN28 · 3차 팀 프로젝트</div>
+          <div class="chips"><span>LangGraph</span><span>FastAPI</span><span>Memgraph</span></div>
+          <p class="desc">고령층 법령을 근거·출처와 함께 답하는 Agentic RAG + GraphRAG 상담 서비스. Main Agent가 필요 시 RAG Tool을 호출합니다.</p>
+          <span class="visit">코드 보기 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://github.com/vosnuev/SKN28-2nd-4Team" target="_blank" rel="noopener">
+        <div class="phone-cover g-green"><span class="ce">🎮</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-brown">📈</div>
+          <h3>리텐션 시뮬레이터</h3>
+          <div class="cat">SKN28 · 2차 팀 프로젝트</div>
+          <div class="chips"><span>XGBoost</span><span>CatBoost</span><span>React</span></div>
+          <p class="desc">앱 리뷰 388,918건을 직접 크롤링해 데이터셋을 구축하고, 이탈 예측을 "지금 무엇을 할까"라는 의사결정(MDP) 시뮬레이션으로 확장했습니다.</p>
+          <span class="visit">코드 보기 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://github.com/vosnuev/SKN28-1st-2team" target="_blank" rel="noopener">
+        <div class="phone-cover g-gold"><span class="ce">🅿️</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-green">🗺️</div>
+          <h3>주차 수급 분석 대시보드</h3>
+          <div class="cat">SKN28 · 1차 팀 프로젝트</div>
+          <div class="chips"><span>Streamlit</span><span>MySQL</span><span>Selenium</span></div>
+          <p class="desc">도로명·지번이 혼재된 비정형 지리정보를 표준화·검증하는 정제 파이프라인과 지역별 주차 수급 분석 대시보드.</p>
+          <span class="visit">코드 보기 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://github.com/vosnuev/curriculum_agent" target="_blank" rel="noopener">
+        <div class="phone-cover g-brown"><span class="ce">📚</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-orange">🔎</div>
+          <h3>Curriculum RAG Agent</h3>
+          <div class="cat">개인 · RAG Agent</div>
+          <div class="chips"><span>LangChain</span><span>Pinecone</span><span>Cohere</span></div>
+          <p class="desc">교육과정 PDF 기반 학년별 Q&A. Multi-Query 확장 → 벡터 검색 → Rerank → 출처(pg.) 명시 답변으로 이어지는 스마트 라우팅.</p>
+          <span class="visit">코드 보기 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://toeic-flashcards.vercel.app" target="_blank" rel="noopener">
+        <div class="phone-cover g-orange"><span class="ce">📖</span><span class="live">LIVE</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-red">🅰️</div>
+          <h3>TOEIC Flashcards</h3>
+          <div class="cat">개인 · PWA</div>
+          <div class="chips"><span>PWA</span><span>JavaScript</span><span>Vercel</span></div>
+          <p class="desc">뜻·어원·유의어·예문까지 카드로 외우는 토익 단어 암기 웹앱. iPhone/iPad 최적화 전체화면 학습을 지원합니다.</p>
+          <span class="visit">라이브 데모 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://github.com/vosnuev/Shopping_app" target="_blank" rel="noopener">
+        <div class="phone-cover g-red"><span class="ce">🛍️</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-gold">📷</div>
+          <h3>Smart Shopping Assistant</h3>
+          <div class="cat">개인 · Vision + LLM</div>
+          <div class="chips"><span>OpenAI Vision</span><span>LangChain</span></div>
+          <p class="desc">사진 속 물품·가격을 추출해 온라인몰 가격과 비교하도록 돕는 AI 쇼핑 도우미. Moderation API로 입력을 안전하게 필터링.</p>
+          <span class="visit">코드 보기 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://github.com/vosnuev/Subway_CrowdCheck" target="_blank" rel="noopener">
+        <div class="phone-cover g-green"><span class="ce">🚇</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-brown">⏱️</div>
+          <h3>Subway CrowdCheck</h3>
+          <div class="cat">개인 · Web App</div>
+          <div class="chips"><span>Flask</span><span>Jinja2</span><span>JavaScript</span></div>
+          <p class="desc">서울 지하철 시간대별 혼잡도를 조회하는 Flask 웹 앱. 노선 조회·시간 비교·나만의 루트 기능을 제공합니다.</p>
+          <span class="visit">코드 보기 →</span>
+        </div>
+      </a>
+
+      <a class="phone rv" href="https://github.com/vosnuev/score-prediction-analysis" target="_blank" rel="noopener">
+        <div class="phone-cover g-gold"><span class="ce">📈</span></div>
+        <div class="phone-body">
+          <div class="phone-ava g-green">🧮</div>
+          <h3>학생 성적 인과관계 분석</h3>
+          <div class="cat">개인 · 데이터 분석</div>
+          <div class="chips"><span>Pandas</span><span>Matplotlib</span></div>
+          <p class="desc">외부 요인 상관관계가 0.2로 약하자, 시험 후반부 집중력·체력 저하라는 행동 패턴 가설로 인과를 도출. 4개 팀 중 유일하게 차별화된 인사이트로 평가받았습니다.</p>
+          <span class="visit">코드 보기 →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARTNER LOGOS (tech stack) ===== -->
+<section class="bg-soft" style="padding:56px 0;">
+  <div class="wrap center" style="margin-bottom:28px;">
+    <div class="eyebrow rv">TECH STACK</div>
+    <h2 class="title rv" style="font-size:clamp(24px,3vw,34px);">함께 쓰는 도구들</h2>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track" id="mtrack"></div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="voices">
+  <div class="wrap center" style="margin-bottom:44px;">
+    <div class="eyebrow rv">FEEDBACK</div>
+    <h2 class="title rv">받았던 평가들</h2>
+  </div>
+  <div class="wrap">
+    <div class="tgrid">
+      <div class="tcard rv">
+        <p class="quote">"단순 예측을 넘어 임계값 조정과 가중치 설정을 통해 <b>실무적 전략을 제시</b>했다."</p>
+        <div class="who"><span class="ava g-orange">M</span><div><div class="nm">부트캠프 멘토</div><div class="rl">이커머스 이탈 예측 프로젝트</div></div></div>
+      </div>
+      <div class="tcard rv">
+        <p class="quote">"<b>모델 친화적인 피처 엔지니어링 능력</b>이 돋보인다."</p>
+        <div class="who"><span class="ava g-red">M</span><div><div class="nm">부트캠프 멘토</div><div class="rl">ML 모델링 평가</div></div></div>
+      </div>
+      <div class="tcard rv">
+        <p class="quote">"4개 팀 중 <b>유일하게 단순 수치 나열을 넘어선 인과관계</b>를 이끌어냈다."</p>
+        <div class="who"><span class="ava g-green">R</span><div><div class="nm">분석 리뷰</div><div class="rl">학생 성적 예측 분석</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="bg-soft" id="faq">
+  <div class="wrap center" style="margin-bottom:40px;">
+    <div class="eyebrow rv">FAQ</div>
+    <h2 class="title rv">자주 묻는 질문</h2>
+  </div>
+  <div class="wrap faq">
+    <details open><summary>전하영님은 어떤 엔지니어인가요?<span class="pm">+</span></summary><div class="ans">교육 현장에서 문제를 정의하고 시스템으로 해결해 온 경험을 바탕으로, 데이터 분석과 RAG·LLM 에이전트로 실제 동작하는 제품을 만드는 AI/ML 엔지니어입니다.</div></details>
+    <details><summary>어떤 직무를 희망하나요?<span class="pm">+</span></summary><div class="ans">AI/ML 엔지니어, 데이터 엔지니어, 데이터 분석가, 프롬프트 엔지니어 직무로 구직 중입니다.</div></details>
+    <details><summary>주요 기술 스택은 무엇인가요?<span class="pm">+</span></summary><div class="ans">Python·FastAPI·LangChain/LangGraph·RAG·PyTorch·Pandas·SQL·Docker·React/TypeScript를 사용합니다.</div></details>
+    <details><summary>강점은 무엇인가요?<span class="pm">+</span></summary><div class="ans">데이터 이면의 근본 원인을 끝까지 추적하는 구조적 분석력과, 문제 정의부터 배포까지 전체 파이프라인을 연결하는 실행력입니다.</div></details>
+    <details><summary>포트폴리오/코드는 어디서 보나요?<span class="pm">+</span></summary><div class="ans">GitHub(github.com/vosnuev)에서 전체 저장소를, 위 프로젝트 카드에서 라이브 데모를 확인하실 수 있습니다.</div></details>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final" id="contact">
+  <div class="wrap">
+    <h2>지금 바로 연락 주세요<br />채용도, 협업도, 커피챗도 환영합니다</h2>
+    <div style="margin-top:30px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+      <a class="btn btn-primary btn-lg" href="mailto:vosnuevo@gmail.com">✉ vosnuevo@gmail.com</a>
+      <a class="btn btn-ghost btn-lg" href="https://github.com/vosnuev" target="_blank" rel="noopener">GitHub @vosnuev</a>
+    </div>
+    <div class="deco">
+      <div class="ph g-orange"><span class="ph-emoji">🤖</span></div>
+      <div class="ph g-red" style="margin-top:18px;"><span class="ph-emoji">📊</span></div>
+      <div class="ph g-green"><span class="ph-emoji">🏫</span></div>
+      <div class="ph g-gold" style="margin-top:18px;"><span class="ph-emoji">⚙️</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-grid">
+      <div>
+        <div class="logo"><span class="mark">전</span>하영<span style="color:var(--gold)">.</span></div>
+        <p class="blurb">데이터로 듣고, 에이전트로 말하다. 교사에서 AI 엔지니어로 전환한 전하영의 포트폴리오입니다.</p>
+        <div class="ft-social">
+          <a href="https://github.com/vosnuev" target="_blank" rel="noopener" aria-label="GitHub">🐙</a>
+          <a href="mailto:vosnuevo@gmail.com" aria-label="Email">✉️</a>
+          <a href="https://m.blog.naver.com/hi---0/" target="_blank" rel="noopener" aria-label="Blog">📝</a>
+        </div>
+      </div>
+      <div class="ft">
+        <h4>소개</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">역량</a></li>
+          <li><a href="#voices">평가</a></li>
+        </ul>
+      </div>
+      <div class="ft">
+        <h4>프로젝트</h4>
+        <ul>
+          <li><a href="https://github.com/vosnuev/SKN28-3rd-1Team" target="_blank" rel="noopener">법률 상담 RAG</a></li>
+          <li><a href="https://github.com/vosnuev/SKN28-2nd-4Team" target="_blank" rel="noopener">리텐션 시뮬레이터</a></li>
+          <li><a href="https://toeic-flashcards.vercel.app" target="_blank" rel="noopener">TOEIC Flashcards</a></li>
+          <li><a href="https://github.com/vosnuev?tab=repositories" target="_blank" rel="noopener">전체 보기</a></li>
+        </ul>
+      </div>
+      <div class="ft">
+        <h4>연락</h4>
+        <ul>
+          <li><a href="mailto:vosnuevo@gmail.com">이메일</a></li>
+          <li><a href="https://github.com/vosnuev" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://m.blog.naver.com/hi---0/" target="_blank" rel="noopener">블로그</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-legal">
+      전하영 (Ha-young Jeon) · AI/ML Engineer<br />
+      Contact: vosnuevo@gmail.com · GitHub: github.com/vosnuev<br />
+      © 2026 전하영.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // logo marquee (duplicated for seamless loop)
+  const logos = [
+    ['Python','#EC4A22'],['FastAPI','#4C7A33'],['LangChain','#3A2412'],['LangGraph','#C5122A'],
+    ['PyTorch','#EC4A22'],['Pinecone','#F2A618'],['React','#4C7A33'],['TypeScript','#C5122A'],
+    ['Pandas','#3A2412'],['Docker','#EC4A22'],['MySQL','#F2A618'],['Streamlit','#C5122A'],
+  ];
+  const track = document.getElementById('mtrack');
+  const make = () => logos.map(([n,c]) =>
+    `<div class="logo-chip"><span class="lo" style="background:${c}">${n[0]}</span>${n}</div>`).join('');
+  track.innerHTML = make() + make();
+</script>
+</body>
+</html>

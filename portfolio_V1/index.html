@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- ═══════════════════════════════════════════════════════════════
+     전하영 · AI Engineer 포트폴리오 (라임 팝 디자인)
+     화면 설계도 (위에서 아래 순서)
+     ① GNB(상단 고정 내비게이션)
+     ② HERO — 타이틀 + CTA + 아이폰 목업 3대(대표 프로젝트 3개)
+     ③ METRICS — 핵심 성과 지표 4칸
+     ④ ABOUT — 좌: 텍스트 / 우: 이미지 분할
+     ⑤ HOW I WORK — 좌: 이미지 / 우: 텍스트 분할(반전)
+     ⑥ CAPABILITIES — 역량 카드 가로 스크롤 캐러셀
+     ⑦ PROJECTS — 프로젝트 카드 3×2 그리드
+     ⑧ TECH STACK — 기술 스택 알약 칩
+     ⑨ FEEDBACK — 받았던 평가 3카드
+     ⑩ FAQ — 아코디언
+     ⑪ CTA — 연락처 배너
+     ⑫ FOOTER — 4단 그리드
+     ⑬ SCRIPT — 스크롤 리빌 애니메이션
+═══════════════════════════════════════════════════════════════ -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전하영 · AI Engineer</title>
+<meta name="description" content="전하영 · 데이터로 듣고, 에이전트로 말하다 — AI/ML 엔지니어 포트폴리오" />
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet" />
+<style>
+  /* ───────── 공통 토큰: 색상·서체 ───────── */
+  :root {
+    --ink:   #141414;   /* 메인 검정 */
+    --lime:  #C6F432;   /* 포인트 라임 */
+    --lime-soft: #F2FBD9;
+    --paper: #FFFFFF;   /* 배경 */
+    --paper-2: #F7F7F2; /* 보조 배경 */
+    --gray:  #5A5A5A;   /* 본문 회색 */
+    --gray-2:#888888;   /* 흐린 회색 */
+    --olive: #7a8f1d;   /* 아이브로우(섹션 라벨) */
+    --font: 'SUIT Variable', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--ink); background: var(--paper); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .06em; color: var(--olive); }
+  h2.title { font-size: clamp(26px, 4vw, 36px); font-weight: 800; line-height: 1.2; margin: 10px 0 14px; }
+  .lead { font-size: 15px; color: var(--gray); }
+  .center { text-align: center; }
+
+  /* 알약 버튼 */
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 15px; padding: 14px 30px; border-radius: 999px; transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-dark  { background: var(--ink); color: #fff; }
+  .btn-ghost { border: 2px solid var(--ink); padding: 12px 26px; }
+
+  /* 스크롤 리빌 */
+  .rv { opacity: 0; transform: translateY(22px); transition: opacity .6s, transform .6s; }
+  .rv.in { opacity: 1; transform: none; }
+
+  /* ───────── ① GNB ───────── */
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 2px solid var(--ink); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 19px; }
+  .logo .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); border: 2px solid var(--ink); }
+  .menu { display: flex; gap: 26px; font-size: 14px; font-weight: 700; color: #555; }
+  .menu a:hover { color: var(--ink); }
+  .nav-cta { display: flex; align-items: center; gap: 16px; }
+  .nav-cta .gh { font-size: 14px; font-weight: 700; color: #555; }
+  .nav-cta .btn { font-size: 13.5px; padding: 10px 20px; }
+  @media (max-width: 860px) { .menu, .nav-cta .gh { display: none; } }
+
+  /* ───────── ② HERO ───────── */
+  .hero { text-align: center; padding: 64px 24px 0; }
+  .hero .badge { display: inline-flex; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 16px; font-size: 12.5px; font-weight: 800; background: var(--lime); }
+  .hero h1 { margin-top: 22px; font-size: clamp(36px, 6.5vw, 56px); line-height: 1.12; font-weight: 800; letter-spacing: -.02em; }
+  .hero h1 .hl { background: linear-gradient(transparent 62%, var(--lime) 62%); }
+  .hero .lead { margin: 18px auto 0; max-width: 500px; font-size: 17px; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+
+  /* ② HERO — 아이폰 목업 3대 */
+  .phones { display: flex; justify-content: center; align-items: flex-end; gap: 30px; margin-top: 52px; padding-bottom: 8px; flex-wrap: wrap; }
+  .iphone { width: 300px; height: 620px; border-radius: 48px; padding: 12px; display: flex; flex-direction: column; transition: transform .25s; }
+  .iphone:hover { transform: translateY(-10px) rotate(0deg) !important; }
+  .iphone-light { background: #fff; border: 2.5px solid var(--ink); box-shadow: 10px 10px 0 var(--lime); }
+  .iphone-dark  { background: var(--ink); color: #fff; height: 640px; box-shadow: 0 26px 40px -18px rgba(20,20,20,.45); }
+  .iphone .notch { width: 110px; height: 26px; background: var(--ink); border-radius: 999px; margin: 6px auto 0; flex-shrink: 0; }
+  .iphone-dark .notch { background: #000; border: 1px solid #333; }
+  .iphone .screen { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 26px 16px 14px; border-radius: 36px; margin-top: 10px; min-height: 0; }
+  .iphone-light .screen { background: radial-gradient(260px circle at 50% 0%, var(--lime-soft), transparent 70%); }
+  .iphone .app-icon { width: 74px; height: 74px; border-radius: 22px; display: grid; place-items: center; font-weight: 800; font-size: 28px; }
+  .iphone .p-name { margin-top: 14px; font-weight: 800; font-size: 20px; }
+  .iphone .p-sub  { margin-top: 5px; font-size: 13px; font-weight: 700; color: #777; }
+  .iphone-dark .p-sub { color: #9d9d9d; }
+  .iphone .chips { display: flex; gap: 6px; margin-top: 12px; }
+  .iphone .chips span { font-size: 11px; font-weight: 800; border-radius: 999px; padding: 3px 10px; border: 2px solid var(--ink); }
+  .iphone .chips .on { background: var(--lime); }
+  .iphone-dark .chips span { border-color: #444; }
+  .iphone-dark .chips .on { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+  .iphone .rows { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+  .iphone .row { display: flex; align-items: center; gap: 10px; border-radius: 16px; padding: 12px 14px; text-align: left; background: #fff; border: 2px solid var(--ink); }
+  .iphone-dark .row { background: #222; border: none; }
+  .iphone .row .ic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+  .iphone .row .t1 { font-size: 12.5px; font-weight: 800; }
+  .iphone .row .t2 { font-size: 11px; color: var(--gray-2); font-weight: 700; }
+  .iphone .p-cta { margin-top: auto; width: 100%; text-align: center; font-size: 14px; font-weight: 800; padding: 14px 0; border-radius: 999px; }
+  .ic-lime { background: var(--lime); border: 2px solid var(--ink); }
+  .ic-ink  { background: var(--ink); color: var(--lime); }
+  @media (max-width: 1020px) { .phones { gap: 20px; } .iphone { transform: none !important; } }
+
+  /* ───────── ③ METRICS ───────── */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); margin-top: 56px; }
+  .metric { padding: 28px 20px; text-align: center; border-right: 2px solid var(--ink); }
+  .metric:last-child { border-right: none; }
+  .metric.hl { background: var(--lime); }
+  .metric .n { font-size: clamp(20px, 2.6vw, 27px); font-weight: 800; }
+  .metric .l { font-size: 12.5px; font-weight: 700; color: #777; margin-top: 5px; }
+  .metric.hl .l { color: #3d4a12; }
+  @media (max-width: 720px) { .metrics { grid-template-columns: 1fr 1fr; } .metric { border-bottom: 2px solid var(--ink); } .metric:nth-child(even) { border-right: none; } .metric:nth-child(n+3) { border-bottom: none; } }
+
+  /* ───────── ④⑤ 분할 섹션 (ABOUT / HOW I WORK) ───────── */
+  section.split-sec { border-top: 2px solid var(--ink); padding: 64px 0; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+  .bg-soft { background: var(--paper-2); }
+  .feature { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; font-size: 14.5px; font-weight: 700; }
+  .feature div { display: flex; align-items: center; gap: 10px; }
+  .feature .dot { width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; font-size: 12px; flex-shrink: 0; }
+  .dot-lime { background: var(--lime); border: 2px solid var(--ink); }
+  .dot-line { border: 2px solid var(--ink); font-size: 11px; }
+  .media-ph { height: 320px; border-radius: 24px; display: grid; place-items: center; font-weight: 800; font-size: 17px; text-align: center; }
+  .media-light { background: #fff; border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--lime); }
+  .media-dark  { background: var(--ink); color: var(--lime); }
+  .media-ph small { font-size: 12.5px; color: var(--gray-2); font-weight: 700; display: block; }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; gap: 28px; } .split .media-first { order: 2; } }
+
+  /* ───────── ⑥ CAPABILITIES ───────── */
+  .caps-row { display: flex; gap: 16px; padding: 28px 24px 12px; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .caps-row::-webkit-scrollbar { height: 8px; }
+  .caps-row::-webkit-scrollbar-thumb { background: #ddd; border-radius: 999px; }
+  .cap { scroll-snap-align: start; flex: 0 0 220px; border: 2px solid var(--ink); border-radius: 20px; background: #fff; padding: 18px; transition: transform .2s; }
+  .cap:hover { transform: translateY(-5px); }
+  .cap .cover { height: 70px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; }
+  .cover-lime { background: var(--lime); border: 2px solid var(--ink); }
+  .cover-ink  { background: var(--ink); color: var(--lime); }
+  .cap p { margin: 12px 0 10px; font-size: 13px; line-height: 1.55; color: var(--gray); }
+  .cap .tags { display: flex; flex-wrap: wrap; gap: 5px; font-size: 11px; font-weight: 800; }
+  .cap .tags span { border: 2px solid var(--ink); border-radius: 999px; padding: 2px 9px; }
+
+  /* ───────── ⑦ PROJECTS ───────── */
+  .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .projects { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .projects { grid-template-columns: 1fr; } }
+  .pcard { border: 2px solid var(--ink); border-radius: 24px; overflow: hidden; background: #fff; display: block; transition: transform .2s; }
+  .pcard:hover { transform: translateY(-5px); }
+  .pcard .cover { height: 86px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-weight: 800; font-size: 14px; }
+  .pcard .cover .live { font-size: 10px; font-weight: 800; background: var(--ink); color: #fff; padding: 3px 9px; border-radius: 999px; }
+  .pcard .body { padding: 16px; text-align: center; }
+  .pcard h3 { font-size: 15.5px; font-weight: 800; }
+  .pcard .cat { font-size: 11.5px; font-weight: 700; color: var(--olive); margin-top: 3px; }
+  .pcard .desc { margin: 10px 0 12px; font-size: 12.5px; line-height: 1.55; color: var(--gray); }
+  .pcard .visit { background: var(--ink); color: #fff; font-size: 12.5px; font-weight: 800; padding: 10px; border-radius: 999px; }
+  .pcard:hover .visit { background: #333; }
+  .cov-lime { background: var(--lime); }
+  .cov-ink  { background: var(--ink); color: var(--lime); }
+  .cov-gray { background: #EFEFE6; }
+
+  /* ───────── ⑧ TECH STACK ───────── */
+  .stack { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .stack span { border: 2px solid var(--ink); background: #fff; border-radius: 999px; padding: 9px 18px; font-size: 13.5px; font-weight: 800; }
+  .stack span.on { background: var(--lime); }
+
+  /* ───────── ⑨ FEEDBACK ───────── */
+  .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 820px) { .tgrid { grid-template-columns: 1fr; } }
+  .tcard { border: 2px solid var(--ink); border-radius: 20px; padding: 20px; background: #fff; }
+  .tcard p { font-size: 14px; line-height: 1.65; }
+  .tcard .who { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
+  .tcard .ava { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+  .tcard .nm { font-weight: 800; font-size: 13px; }
+  .tcard .rl { font-size: 11.5px; color: var(--gray-2); }
+
+  /* ───────── ⑩ FAQ ───────── */
+  .faq { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+  .faq details { border: 2px solid var(--ink); border-radius: 16px; background: #fff; padding: 4px 20px; }
+  .faq summary { cursor: pointer; font-weight: 800; font-size: 15px; padding: 13px 0; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font-size: 20px; color: var(--olive); }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { margin: 0 0 14px; font-size: 13.5px; line-height: 1.65; color: var(--gray); }
+
+  /* ───────── ⑪ CTA ───────── */
+  .cta { padding: 76px 24px; text-align: center; border-top: 2px solid var(--ink); }
+  .cta h2 { font-size: clamp(28px, 4.6vw, 40px); font-weight: 800; line-height: 1.2; }
+
+  /* ───────── ⑫ FOOTER ───────── */
+  footer { background: var(--ink); color: #B9B9B0; padding: 48px 0 28px; }
+  .ft-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px; }
+  @media (max-width: 720px) { .ft-grid { grid-template-columns: 1fr 1fr; } }
+  .ft-grid h4 { color: var(--lime); font-size: 11.5px; font-weight: 800; letter-spacing: .08em; margin-bottom: 12px; }
+  .ft-grid .col { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; }
+  .ft-grid .col a:hover { color: #fff; }
+  .ft-legal { border-top: 1px solid #333; margin-top: 32px; padding-top: 18px; font-size: 12px; color: #777; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ ① GNB — 상단 고정 내비게이션 ═══════════ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">전하영<span class="dot"></span></a>
+    <nav class="menu">
+      <a href="#about">소개</a>
+      <a href="#capabilities">역량</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#feedback">평가</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/vosnuev" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-dark" href="mailto:vosnuevo@gmail.com">채용 문의</a>
+    </div>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ═══════════ ② HERO — 타이틀 + CTA + 아이폰 목업 3대 ═══════════ -->
+<section class="hero">
+  <div class="badge">AI / ML ENGINEER · 구직 중</div>
+  <h1>데이터로 듣고,<br>에이전트로 <span class="hl">말하다</span></h1>
+  <p class="lead">교사에서 AI 엔지니어로 — 현장의 문제를 정의하고,<br>데이터와 LLM으로 실제 동작하는 제품을 만듭니다.</p>
+  <div class="hero-btns">
+    <a class="btn btn-dark" href="#projects">프로젝트 보러가기 →</a>
+    <a class="btn btn-ghost" href="https://github.com/vosnuev" target="_blank" rel="noopener">GitHub</a>
+  </div>
+
+  <!-- ②-1 아이폰 목업 #1 : 실시간 출결 공유 웹앱 -->
+  <div class="phones">
+    <div class="iphone iphone-light" style="transform: rotate(-3deg)">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="app-icon ic-lime">출</div>
+        <div class="p-name">실시간 출결 공유</div>
+        <div class="p-sub">현장에서 직접 배포한 웹앱</div>
+        <div class="chips"><span class="on">LIVE</span><span>Cloud DB</span></div>
+        <div class="rows">
+          <div class="row"><span class="ic ic-lime">✓</span><div><div class="t1">출결 누락율 80% → 5%</div><div class="t2">43명 학급 실사용</div></div></div>
+          <div class="row"><span class="ic ic-ink">RT</span><div><div class="t1">학부모 입력 → 실시간 반영</div><div class="t2">교사 대시보드 연동</div></div></div>
+        </div>
+        <a class="p-cta btn-dark" href="https://app--school-connect-attendance-copy-bbf1457b.base44.app/" target="_blank" rel="noopener">라이브 데모 보기</a>
+      </div>
+    </div>
+
+    <!-- ②-2 아이폰 목업 #2 : 고령층 법률 상담 RAG (가운데, 다크) -->
+    <div class="iphone iphone-dark" style="transform: translateY(-8px)">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="app-icon" style="background: var(--lime); color: var(--ink)">法</div>
+        <div class="p-name">고령층 법률 상담 RAG</div>
+        <div class="p-sub">근거와 출처로 답하는 에이전트</div>
+        <div class="chips"><span class="on">LangGraph</span><span>GraphRAG</span></div>
+        <div class="rows">
+          <div class="row"><span class="ic" style="background: var(--lime); color: var(--ink)">Ag</span><div><div class="t1">Main Agent가 RAG Tool 호출</div><div class="t2">Agentic RAG 구조</div></div></div>
+          <div class="row"><span class="ic" style="background:#333; color: var(--lime)">§</span><div><div class="t1">법령 근거·출처 명시 답변</div><div class="t2">Memgraph · FastAPI</div></div></div>
+        </div>
+        <a class="p-cta" style="background: var(--lime); color: var(--ink)" href="https://github.com/vosnuev/SKN28-3rd-1Team" target="_blank" rel="noopener">코드 보기</a>
+      </div>
+    </div>
+
+    <!-- ②-3 아이폰 목업 #3 : 리텐션 시뮬레이터 -->
+    <div class="iphone iphone-light" style="transform: rotate(3deg)">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="app-icon ic-ink">Re</div>
+        <div class="p-name">리텐션 시뮬레이터</div>
+        <div class="p-sub">이탈 예측을 의사결정으로 확장</div>
+        <div class="chips"><span class="on">XGBoost</span><span>MDP</span></div>
+        <div class="rows">
+          <div class="row"><span class="ic ic-lime" style="font-size:11px">38만</span><div><div class="t1">리뷰 388,918건 크롤링</div><div class="t2">데이터셋 직접 구축</div></div></div>
+          <div class="row"><span class="ic ic-ink">?</span><div><div class="t1">"지금 무엇을 할까" 시뮬레이션</div><div class="t2">React 인터랙티브 UI</div></div></div>
+        </div>
+        <a class="p-cta btn-dark" href="https://github.com/vosnuev/SKN28-2nd-4Team" target="_blank" rel="noopener">코드 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ③ METRICS — 핵심 성과 지표 4칸 ═══════════ -->
+<div class="metrics">
+  <div class="metric rv"><div class="n">388,918건</div><div class="l">앱 리뷰 데이터셋 구축</div></div>
+  <div class="metric hl rv"><div class="n">80% → 5%</div><div class="l">출결 누락율 개선</div></div>
+  <div class="metric rv"><div class="n">8+</div><div class="l">AI·데이터 프로젝트</div></div>
+  <div class="metric rv"><div class="n">5년 10개월</div><div class="l">현장 문제해결 경력</div></div>
+</div>
+
+<!-- ═══════════ ④ ABOUT — 텍스트(좌) + 이미지(우) 분할 ═══════════ -->
+<section class="split-sec bg-soft" id="about">
+  <div class="wrap split">
+    <div class="rv">
+      <div class="eyebrow">ABOUT ME</div>
+      <h2 class="title">코드가 아니라<br>문제부터 봅니다</h2>
+      <p class="lead">4년의 교직은 행정 현장의 비효율을 정의하고 실제 적용 가능한 시스템을 만드는 테스트의 장이었습니다. "왜 이런 변화가 일어났는가"를 끝까지 추적하는 구조적 분석력이 강점입니다.</p>
+      <div class="feature">
+        <div><span class="dot dot-lime">✓</span>문제 정의부터 배포까지 전체 파이프라인 경험</div>
+        <div><span class="dot dot-lime">✓</span>수집·전처리·모델링·평가 전 과정 수행</div>
+        <div><span class="dot dot-lime">✓</span>RAG·LLM Agent로 동작하는 제품 구현</div>
+      </div>
+    </div>
+    <div class="media-ph media-light rv">교사 → AI 엔지니어<small>(이미지 자리)</small></div>
+  </div>
+</section>
+
+<!-- ═══════════ ⑤ HOW I WORK — 이미지(좌) + 텍스트(우) 분할(반전) ═══════════ -->
+<section class="split-sec">
+  <div class="wrap split">
+    <div class="media-ph media-dark rv media-first">지표 기반 의사결정<small style="color:#9d9d9d">(이미지 자리)</small></div>
+    <div class="rv">
+      <div class="eyebrow">HOW I WORK</div>
+      <h2 class="title">만들고 끝이 아니에요</h2>
+      <p class="lead">정량 지표로 모든 선택의 근거를 세웁니다. 혼동행렬·AUC-ROC·PR 곡선 등 다각도 지표로 모델 선정의 타당성을 입증하고, 리팩토링으로 보안·유지보수까지 보완합니다.</p>
+      <div class="feature">
+        <div><span class="dot dot-line">1</span>EDA·전처리 전략을 정량 비교로 결정</div>
+        <div><span class="dot dot-line">2</span>임계값 조정·가중치 설정으로 실무 전략 제시</div>
+        <div><span class="dot dot-line">3</span>흐름·구조 중심 학습 + 리팩토링 보완</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ⑥ CAPABILITIES — 역량 카드 가로 캐러셀 ═══════════ -->
+<section class="split-sec bg-soft" id="capabilities" style="padding-bottom:56px">
+  <div class="wrap center">
+    <div class="eyebrow rv">CAPABILITIES</div>
+    <h2 class="title rv">무엇이든 만들 수 있는 역량</h2>
+    <p class="lead rv">AI 서비스 전체 파이프라인을 다룹니다. 좌우로 넘겨보세요.</p>
+  </div>
+  <div class="wrap">
+    <div class="caps-row">
+      <div class="cap"><div class="cover cover-lime">AI / LLM</div><p>RAG·Agentic RAG·GraphRAG 설계와 프롬프트 엔지니어링.</p><div class="tags"><span>LangChain</span><span>LangGraph</span></div></div>
+      <div class="cap"><div class="cover cover-ink">ML / DL</div><p>분류·예측 모델링과 검증. 피처 엔지니어링과 임계값 전략.</p><div class="tags"><span>PyTorch</span><span>XGBoost</span></div></div>
+      <div class="cap"><div class="cover cover-lime">데이터 분석</div><p>EDA·전처리·시각화로 데이터 이면의 인과관계 추적.</p><div class="tags"><span>Pandas</span><span>NumPy</span></div></div>
+      <div class="cap"><div class="cover cover-ink">백엔드</div><p>API 서버 구축과 클라우드 배포, 데이터 파이프라인.</p><div class="tags"><span>FastAPI</span><span>Docker</span></div></div>
+      <div class="cap"><div class="cover cover-lime">프론트엔드</div><p>React·TypeScript 기반 UI와 PWA, 반응형 웹.</p><div class="tags"><span>React 19</span><span>TS</span></div></div>
+      <div class="cap"><div class="cover cover-ink">데이터 수집</div><p>크롤링으로 대체 데이터를 발굴하고 무결성을 검증.</p><div class="tags"><span>Selenium</span><span>BS4</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ⑦ PROJECTS — 프로젝트 카드 그리드 ═══════════ -->
+<section class="split-sec" id="projects">
+  <div class="wrap center" style="margin-bottom:32px">
+    <div class="eyebrow rv">PROJECTS</div>
+    <h2 class="title rv">프로젝트를 하나씩 담았어요</h2>
+    <p class="lead rv">각 카드를 누르면 코드·라이브 데모로 이동합니다.</p>
+  </div>
+  <div class="wrap">
+    <div class="projects">
+      <a class="pcard rv" href="https://app--school-connect-attendance-copy-bbf1457b.base44.app/" target="_blank" rel="noopener">
+        <div class="cover cov-lime"><span>출결</span><span class="live">LIVE</span></div>
+        <div class="body"><h3>실시간 출결 공유 웹앱</h3><div class="cat">현장 문제해결 · 직접 배포</div><p class="desc">43명 학급 적용, 출결 누락율 80%→5% 개선.</p><div class="visit">라이브 데모 →</div></div>
+      </a>
+      <a class="pcard rv" href="https://github.com/vosnuev/SKN28-3rd-1Team" target="_blank" rel="noopener">
+        <div class="cover cov-ink"><span>법률 RAG</span></div>
+        <div class="body"><h3>고령층 법률 상담 RAG</h3><div class="cat">SKN28 · 3차 팀 프로젝트</div><p class="desc">Agentic RAG + GraphRAG, 근거·출처 명시 답변.</p><div class="visit">코드 보기 →</div></div>
+      </a>
+      <a class="pcard rv" href="https://github.com/vosnuev/SKN28-2nd-4Team" target="_blank" rel="noopener">
+        <div class="cover cov-gray"><span>리텐션</span></div>
+        <div class="body"><h3>리텐션 시뮬레이터</h3><div class="cat">SKN28 · 2차 팀 프로젝트</div><p class="desc">리뷰 388,918건 크롤링, MDP 의사결정 시뮬레이션.</p><div class="visit">코드 보기 →</div></div>
+      </a>
+      <a class="pcard rv" href="https://github.com/vosnuev/SKN28-1st-2team" target="_blank" rel="noopener">
+        <div class="cover cov-gray"><span>주차 분석</span></div>
+        <div class="body"><h3>주차 수급 분석 대시보드</h3><div class="cat">SKN28 · 1차 팀 프로젝트</div><p class="desc">비정형 지리정보 정제 파이프라인 + 수급 분석.</p><div class="visit">코드 보기 →</div></div>
+      </a>
+      <a class="pcard rv" href="https://github.com/vosnuev/curriculum_agent" target="_blank" rel="noopener">
+        <div class="cover cov-ink"><span>Curriculum</span></div>
+        <div class="body"><h3>Curriculum RAG Agent</h3><div class="cat">개인 · RAG Agent</div><p class="desc">교육과정 PDF Q&amp;A — 검색·Rerank·출처 명시.</p><div class="visit">코드 보기 →</div></div>
+      </a>
+      <a class="pcard rv" href="https://toeic-flashcards.vercel.app" target="_blank" rel="noopener">
+        <div class="cover cov-lime"><span>TOEIC</span><span class="live">LIVE</span></div>
+        <div class="body"><h3>TOEIC Flashcards</h3><div class="cat">개인 · PWA</div><p class="desc">뜻·어원·유의어·예문 카드 암기 웹앱.</p><div class="visit">라이브 데모 →</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ⑧ TECH STACK — 기술 스택 알약 칩 ═══════════ -->
+<section class="split-sec bg-soft" style="padding:48px 0">
+  <div class="wrap center" style="margin-bottom:20px"><div class="eyebrow">TECH STACK</div></div>
+  <div class="wrap stack rv">
+    <span>Python</span><span class="on">FastAPI</span><span>LangChain</span><span>LangGraph</span>
+    <span class="on">PyTorch</span><span>Pinecone</span><span class="on">React</span><span>Docker</span>
+  </div>
+</section>
+
+<!-- ═══════════ ⑨ FEEDBACK — 받았던 평가 3카드 ═══════════ -->
+<section class="split-sec" id="feedback">
+  <div class="wrap center" style="margin-bottom:28px">
+    <div class="eyebrow rv">FEEDBACK</div>
+    <h2 class="title rv">받았던 평가들</h2>
+  </div>
+  <div class="wrap tgrid">
+    <div class="tcard rv"><p>"단순 예측을 넘어 임계값 조정과 가중치 설정을 통해 <b>실무적 전략을 제시</b>했다."</p><div class="who"><span class="ava dot-lime">M</span><div><div class="nm">부트캠프 멘토</div><div class="rl">이탈 예측 프로젝트</div></div></div></div>
+    <div class="tcard rv"><p>"<b>모델 친화적인 피처 엔지니어링 능력</b>이 돋보인다."</p><div class="who"><span class="ava ic-ink">M</span><div><div class="nm">부트캠프 멘토</div><div class="rl">ML 모델링 평가</div></div></div></div>
+    <div class="tcard rv"><p>"4개 팀 중 <b>유일하게 단순 수치를 넘어선 인과관계</b>를 이끌어냈다."</p><div class="who"><span class="ava dot-lime">R</span><div><div class="nm">분석 리뷰</div><div class="rl">학생 성적 예측 분석</div></div></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ ⑩ FAQ — 아코디언 ═══════════ -->
+<section class="split-sec bg-soft" id="faq">
+  <div class="wrap center" style="margin-bottom:28px">
+    <div class="eyebrow rv">FAQ</div>
+    <h2 class="title rv">자주 묻는 질문</h2>
+  </div>
+  <div class="wrap">
+    <div class="faq">
+      <details open><summary>전하영님은 어떤 엔지니어인가요?</summary><p>교육 현장에서 문제를 정의하고 시스템으로 해결해 온 경험을 바탕으로, 데이터 분석과 RAG·LLM 에이전트로 실제 동작하는 제품을 만드는 AI/ML 엔지니어입니다.</p></details>
+      <details><summary>어떤 직무를 희망하나요?</summary><p>AI/ML 엔지니어, 데이터 엔지니어, 데이터 분석가, 프롬프트 엔지니어 직무로 구직 중입니다.</p></details>
+      <details><summary>주요 기술 스택은 무엇인가요?</summary><p>Python·FastAPI·LangChain/LangGraph·RAG·PyTorch·Pandas·SQL·Docker·React/TypeScript를 사용합니다.</p></details>
+      <details><summary>포트폴리오/코드는 어디서 보나요?</summary><p>GitHub(github.com/vosnuev)에서 전체 저장소를, 프로젝트 카드에서 라이브 데모를 확인하실 수 있습니다.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ⑪ CTA — 연락처 배너 ═══════════ -->
+<section class="cta">
+  <h2>지금 바로 연락 주세요<br><span style="background:linear-gradient(transparent 62%, var(--lime) 62%)">채용도, 협업도, 커피챗도</span> 환영합니다</h2>
+  <div class="hero-btns">
+    <a class="btn btn-dark" href="mailto:vosnuevo@gmail.com">✉ vosnuevo@gmail.com</a>
+    <a class="btn btn-ghost" href="https://github.com/vosnuev" target="_blank" rel="noopener">GitHub @vosnuev</a>
+  </div>
+</section>
+
+<!-- ═══════════ ⑫ FOOTER — 4단 그리드 ═══════════ -->
+<footer>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div>
+        <div style="color:#fff;font-weight:800;font-size:18px">전하영<span style="color:var(--lime)">.</span></div>
+        <p style="margin:10px 0 0;font-size:13px;line-height:1.6;max-width:230px">데이터로 듣고, 에이전트로 말하다. 교사에서 AI 엔지니어로 전환한 전하영의 포트폴리오입니다.</p>
+      </div>
+      <div><h4>소개</h4><div class="col"><a href="#about">About</a><a href="#capabilities">역량</a><a href="#feedback">평가</a></div></div>
+      <div><h4>프로젝트</h4><div class="col"><a href="https://github.com/vosnuev/SKN28-3rd-1Team" target="_blank" rel="noopener">법률 상담 RAG</a><a href="https://github.com/vosnuev/SKN28-2nd-4Team" target="_blank" rel="noopener">리텐션 시뮬레이터</a><a href="https://github.com/vosnuev?tab=repositories" target="_blank" rel="noopener">전체 보기</a></div></div>
+      <div><h4>연락</h4><div class="col"><a href="mailto:vosnuevo@gmail.com">이메일</a><a href="https://github.com/vosnuev" target="_blank" rel="noopener">GitHub</a><a href="https://m.blog.naver.com/hi---0/" target="_blank" rel="noopener">블로그</a></div></div>
+    </div>
+    <div class="ft-legal">© 2026 전하영 (Ha-young Jeon) · AI/ML Engineer · vosnuevo@gmail.com</div>
+  </div>
+</footer>
+
+<!-- ═══════════ ⑬ SCRIPT — 스크롤 리빌 애니메이션 ═══════════ -->
+<script>
+  // 뷰포트 진입 시 .rv 요소에 .in 클래스를 붙여 fade-in / slide-up
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

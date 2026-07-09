@@ -46,15 +46,81 @@
     flex-shrink: 0;
   }
 
-  @media print {
-    body { background: none; padding: 0; gap: 0; }
-    .page { page-break-after: always; width: 100%; height: auto; aspect-ratio: 1123 / 794; }
-    .page:last-child { page-break-after: auto; }
+  /* ===== TIMELINE (공통 하단) ===== */
+  .timeline {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 var(--pad);
+  }
+
+  .timeline-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .timeline-dot {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 10px;
+    cursor: default;
+  }
+
+  .timeline-dot::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sand);
+    flex-shrink: 0;
+  }
+
+  .timeline-dot.active::before {
+    background: var(--accent);
+    width: 8px;
+    height: 8px;
+  }
+
+  .timeline-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--sand);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .timeline-dot.active .timeline-label {
+    color: var(--accent);
+  }
+
+  .timeline-sep {
+    color: var(--sand);
+    font-size: 9px;
+    opacity: 0.5;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--sand);
+    letter-spacing: 0.06em;
   }
 
   /* ===== COVER ===== */
   .cover {
     padding: var(--pad);
+    padding-bottom: 56px;
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: 0;
@@ -174,7 +240,7 @@
     margin-top: 2px;
   }
 
-  /* cover-right icons — fixed uniform size */
+  /* cover-right icons */
   .cover-right {
     display: flex;
     flex-direction: column;
@@ -263,17 +329,24 @@
   /* ===== ABOUT ===== */
   .about {
     padding: var(--pad);
+    padding-bottom: 56px;
     display: grid;
     grid-template-columns: 200px 1fr;
-    gap: 48px;
+    gap: 40px;
     align-items: start;
+  }
+
+  .about-photo-wrap {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
   }
 
   .about-photo {
     width: 200px;
     height: 200px;
-    border-radius: 12px;
     object-fit: cover;
+    display: block;
   }
 
   .about-name {
@@ -318,7 +391,7 @@
   }
 
   /* ===== TECH STACK ===== */
-  .tech-section { padding: var(--pad); }
+  .tech-section { padding: var(--pad); padding-bottom: 56px; }
 
   .tech-grid {
     display: grid;
@@ -339,21 +412,25 @@
   .tech-item {
     font-size: 13px;
     font-weight: 400;
-    line-height: 1.8;
+    line-height: 2;
     color: var(--muted);
-    padding-left: 12px;
+    padding-left: 22px;
     position: relative;
   }
 
   .tech-item::before {
-    content: '—';
+    content: attr(data-icon);
     position: absolute;
     left: 0;
-    color: var(--sand);
+    font-size: 11px;
+    top: 1px;
   }
 
   /* ===== PROJECT ===== */
-  .project { padding: var(--pad); }
+  .project {
+    padding: var(--pad);
+    padding-bottom: 56px;
+  }
 
   .project-header {
     display: flex;
@@ -544,6 +621,7 @@
   /* ===== OTHER PROJECTS ===== */
   .other-projects {
     padding: var(--pad);
+    padding-bottom: 56px;
   }
 
   .other-projects-title {
@@ -599,6 +677,7 @@
   /* ===== CONTACT ===== */
   .contact {
     padding: var(--pad);
+    padding-bottom: 56px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -655,34 +734,18 @@
     padding-bottom: 2px;
   }
 
-  /* ===== FOOTER ===== */
-  .footer {
-    background: var(--text);
-    color: var(--bg);
-    padding: var(--pad);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-name {
-    font-size: 26px;
-    font-weight: 900;
-  }
-
-  .footer-links { display: flex; gap: 20px; }
-
-  .footer-link {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--sand);
-    text-decoration: none;
-  }
-
   /* ===== WEB VIEW ===== */
   @media screen {
     body { display: block; padding: 0; background: var(--bg); }
     .page { margin: 0 auto; min-height: 100vh; height: auto; aspect-ratio: auto; }
+  }
+
+  @media print {
+    body { background: none; padding: 0; gap: 0; }
+    .page { page-break-after: always; width: 100%; height: auto; aspect-ratio: 1123 / 794; }
+    .page:last-child { page-break-after: auto; }
+    .timeline { display: none; }
+    .page-num { display: none; }
   }
 </style>
 </head>
@@ -693,7 +756,6 @@
 <!-- ============================================================ -->
 <div class="page">
   <div class="cover">
-
     <div class="cover-top">
       <img
         src="file:///Users/vosnuevo/Library/Mobile%20Documents/com~apple~CloudDocs/%EA%B0%9C%EC%9D%B8%20%EC%98%81%EC%88%98%EC%A6%9D%20%EB%B0%8F%20%EC%A6%9D%EB%B9%99%EC%9E%90%EB%A3%8C/26%EC%A6%9D%EB%AA%85.jpeg"
@@ -804,8 +866,31 @@
         <a href="mailto:vosnuevo@gmail.com" class="cover-link">Email</a>
       </div>
     </div>
-
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot active"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">1 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -816,13 +901,15 @@
     <div class="section-label">ABOUT ME</div>
   </div>
   <div class="about">
-    <img
-      src="file:///Users/vosnuevo/Library/Mobile%20Documents/com~apple~CloudDocs/%EA%B0%9C%EC%9D%B8%20%EC%98%81%EC%88%98%EC%A6%9D%20%EB%B0%8F%20%EC%A6%9D%EB%B9%99%EC%9E%90%EB%A3%8C/26%EC%A6%9D%EB%AA%85.jpeg"
-      alt="전하영"
-      class="about-photo"
-    >
+    <div class="about-photo-wrap">
+      <img
+        src="file:///Users/vosnuevo/Library/Mobile%20Documents/com~apple~CloudDocs/%EA%B0%9C%EC%9D%B8%20%EC%98%81%EC%88%98%EC%A6%9D%20%EB%B0%8F%20%EC%A6%9D%EB%B9%99%EC%9E%90%EB%A3%8C/26%EC%A6%9D%EB%AA%85.jpeg"
+        alt="전하영"
+        class="about-photo"
+      >
+    </div>
     <div>
-      <div class="aboutname">전하영</div>
+      <div class="about-name">전하영</div>
       <div class="about-focus">
         RAG 파이프라인 · 데이터 파이프라인 · ML 모델링<br>
         문제 정의 → 시스템 구축 (End-to-End)
@@ -846,6 +933,30 @@
       </div>
     </div>
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">2 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -860,60 +971,84 @@
     <div class="tech-grid">
 
       <div>
-        <div class="tech-category-title">RAG · LLM</div>
-        <div class="tech-item">LangChain / LangGraph</div>
-        <div class="tech-item">GPT-4o / GPT-4V API</div>
-        <div class="tech-item">OpenRouter</div>
-        <div class="tech-item">Embedding (OpenAI / Cohere)</div>
-        <div class="tech-item">Hybrid Search (BM25 + Vector)</div>
-        <div class="tech-item">Prompt Engineering</div>
-        <div class="tech-item">Firebase Realtime DB</div>
+        <div class="tech-category-title">🤖 RAG · LLM</div>
+        <div class="tech-item" data-icon="◈">LangChain / LangGraph</div>
+        <div class="tech-item" data-icon="◈">GPT-4o / GPT-4V API</div>
+        <div class="tech-item" data-icon="◈">OpenRouter</div>
+        <div class="tech-item" data-icon="◈">Embedding (OpenAI / Cohere)</div>
+        <div class="tech-item" data-icon="◈">Hybrid Search (BM25 + Vector)</div>
+        <div class="tech-item" data-icon="◈">Prompt Engineering</div>
+        <div class="tech-item" data-icon="◈">Firebase Realtime DB</div>
       </div>
 
       <div>
-        <div class="tech-category-title">데이터베이스</div>
-        <div class="tech-item">MySQL</div>
-        <div class="tech-item">SQL</div>
-        <div class="tech-item">Firebase</div>
-        <div class="tech-item">Pydantic (데이터 검증)</div>
+        <div class="tech-category-title">🗄️ 데이터베이스</div>
+        <div class="tech-item" data-icon="◈">MySQL</div>
+        <div class="tech-item" data-icon="◈">SQL</div>
+        <div class="tech-item" data-icon="◈">Firebase</div>
+        <div class="tech-item" data-icon="◈">Pydantic (데이터 검증)</div>
       </div>
 
       <div>
-        <div class="tech-category-title">파이프라인 · 인프라</div>
-        <div class="tech-item">AWS (EC2, S3, Lambda)</div>
-        <div class="tech-item">Docker / Docker Compose</div>
-        <div class="tech-item">FastAPI</div>
-        <div class="tech-item">Git / GitHub Actions</div>
-        <div class="tech-item">Selenium</div>
+        <div class="tech-category-title">☁️ 파이프라인 · 인프라</div>
+        <div class="tech-item" data-icon="◈">AWS (EC2, S3, Lambda)</div>
+        <div class="tech-item" data-icon="◈">Docker / Docker Compose</div>
+        <div class="tech-item" data-icon="◈">FastAPI</div>
+        <div class="tech-item" data-icon="◈">Git / GitHub Actions</div>
+        <div class="tech-item" data-icon="◈">Selenium</div>
       </div>
 
       <div>
-        <div class="tech-category-title">Python</div>
-        <div class="tech-item">pandas / NumPy</div>
-        <div class="tech-item">asyncio / aiohttp</div>
-        <div class="tech-item">BeautifulSoup</div>
-        <div class="tech-item">scikit-learn</div>
-        <div class="tech-item">XGBoost</div>
+        <div class="tech-category-title">🐍 Python</div>
+        <div class="tech-item" data-icon="◈">pandas / NumPy</div>
+        <div class="tech-item" data-icon="◈">asyncio / aiohttp</div>
+        <div class="tech-item" data-icon="◈">BeautifulSoup</div>
+        <div class="tech-item" data-icon="◈">scikit-learn</div>
+        <div class="tech-item" data-icon="◈">XGBoost</div>
       </div>
 
       <div>
-        <div class="tech-category-title">Frontend</div>
-        <div class="tech-item">React / Next.js</div>
-        <div class="tech-item">TypeScript</div>
-        <div class="tech-item">HTML / CSS / JS</div>
-        <div class="tech-item">D3.js (시각화)</div>
-        <div class="tech-item">Streamlit</div>
+        <div class="tech-category-title">💻 Frontend</div>
+        <div class="tech-item" data-icon="◈">React / Next.js</div>
+        <div class="tech-item" data-icon="◈">TypeScript</div>
+        <div class="tech-item" data-icon="◈">HTML / CSS / JS</div>
+        <div class="tech-item" data-icon="◈">D3.js (시각화)</div>
+        <div class="tech-item" data-icon="◈">Streamlit</div>
       </div>
 
       <div>
-        <div class="tech-category-title">etc</div>
-        <div class="tech-item">Linux Server 관리</div>
-        <div class="tech-item">MCP (Model Context Protocol)</div>
-        <div class="tech-item">TCA (Tree of Thoughts)</div>
+        <div class="tech-category-title">⚙️ etc</div>
+        <div class="tech-item" data-icon="◈">Linux Server 관리</div>
+        <div class="tech-item" data-icon="◈">MCP (Model Context Protocol)</div>
+        <div class="tech-item" data-icon="◈">TCA (Tree of Thoughts)</div>
       </div>
 
     </div>
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">3 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -999,6 +1134,30 @@
       <span class="tech-tag">GPT-4o</span>
     </div>
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">4 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1081,6 +1240,30 @@
       <span class="tech-tag">D3.js</span>
     </div>
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">5 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1162,6 +1345,30 @@
       <span class="tech-tag">BeautifulSoup</span>
     </div>
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">6 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1243,6 +1450,30 @@
       <span class="tech-tag">Naver Maps API</span>
     </div>
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">7 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1318,6 +1549,30 @@
 
     </div>
   </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    </div>
+  </div>
+  <div class="page-num">8 / 9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -1342,20 +1597,30 @@
       </div>
     </div>
   </div>
-</div>
 
-<!-- ============================================================ -->
-<!-- 10. FOOTER -->
-<!-- ============================================================ -->
-<div class="page">
-  <div class="footer">
-    <div class="footer-name">전하영 · AI/MLOps Engineer</div>
-    <div class="footer-links">
-      <a href="https://github.com/vosnuev" class="footer-link">GitHub</a>
-      <a href="https://vosnuevo99.tistory.com/" class="footer-link">Blog</a>
-      <a href="mailto:vosnuevo@gmail.com" class="footer-link">Email</a>
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
+      <span class="timeline-sep">·</span>
+      <div class="timeline-dot active"><span class="timeline-label">Contact</span></div>
     </div>
   </div>
+  <div class="page-num">9 / 9</div>
 </div>
 
 </body>

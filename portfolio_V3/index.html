@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전하영 포트폴리오 — AI/MLOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #FAF7F2;
+    --text:    #1A1A1A;
+    --accent:  #C4573B;
+    --sand:    #D4B8A0;
+    --muted:   #6B6560;
+    --white:   #FFFFFF;
+    --page-w:  1123px;
+    --page-h:  794px;
+    --pad:     48px;
+  }
+
+  html, body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #2a2a2a;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    font-weight: 700;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+    gap: 2px;
+  }
+
+  .page {
+    width: var(--page-w);
+    height: var(--page-h);
+    background: var(--bg);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  @media print {
+    body { background: none; padding: 0; gap: 0; }
+    .page { page-break-after: always; width: 100%; height: auto; aspect-ratio: 1123 / 794; }
+    .page:last-child { page-break-after: auto; }
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    padding: var(--pad);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+  }
+
+  .cover-top {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1.5px solid var(--sand);
+  }
+
+  .cover-photo {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .cover-identity { flex: 1; }
+
+  .cover-name-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .cover-name {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .cover-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  .cover-skills {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+
+  .skill-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .skill-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    background: var(--sand);
+    color: var(--text);
+    border-radius: 999px;
+  }
+
+  /* ===== COVER MIDDLE ===== */
+  .cover-middle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 28px 0;
+  }
+
+  .cover-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cover-projects-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .cover-project-item {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .cover-project-item:last-child { border-bottom: none; }
+
+  .cover-project-num {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--accent);
+    width: 28px;
+    flex-shrink: 0;
+  }
+
+  .cover-project-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .cover-project-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* cover-right icons — fixed uniform size */
+  .cover-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cover-exp-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .cover-exp-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--sand);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .cover-exp-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .cover-exp-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* ===== COVER BOTTOM ===== */
+  .cover-bottom {
+    padding-top: 20px;
+    border-top: 1.5px solid var(--sand);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .cover-intro {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 700px;
+  }
+
+  .cover-links { display: flex; gap: 20px; }
+
+  .cover-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sand);
+    padding-bottom: 1px;
+  }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header { padding: 32px var(--pad) 0; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    padding: var(--pad);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .about-name {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .about-focus {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .about-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 680px;
+  }
+
+  .about-text p + p { margin-top: 10px; }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  .about-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border: 1px solid var(--sand);
+    color: var(--muted);
+    border-radius: 999px;
+  }
+
+  /* ===== TECH STACK ===== */
+  .tech-section { padding: var(--pad); }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tech-category-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1.5px solid var(--sand);
+  }
+
+  .tech-item {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--muted);
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .tech-item::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--sand);
+  }
+
+  /* ===== PROJECT ===== */
+  .project { padding: var(--pad); }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1.5px solid var(--sand);
+  }
+
+  .project-num {
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .project-title-group { flex: 1; }
+
+  .project-title {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text);
+  }
+
+  .project-subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .project-thumb {
+    width: 360px;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--sand);
+  }
+
+  .project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .project-overview {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  .project-features { margin-top: 14px; }
+
+  .project-features-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .project-features li {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--muted);
+    list-style: none;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .project-features li::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 7px;
+    top: 5px;
+  }
+
+  .project-whs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-wh {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+
+  .project-wh-label {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .project-wh-label.why { color: var(--accent); }
+  .project-wh-label.how { color: #8B7355; }
+  .project-wh-label.what { color: var(--text); }
+
+  .project-wh-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .project-result {
+    background: var(--sand);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .project-result-label {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .project-result-text {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .project-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .highlight-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+
+  .highlight-label {
+    font-size: 12px;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .highlight-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tech-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border: 1px solid var(--sand);
+    color: var(--muted);
+    border-radius: 999px;
+  }
+
+  /* ===== OTHER PROJECTS ===== */
+  .other-projects {
+    padding: var(--pad);
+  }
+
+  .other-projects-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .other-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .other-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .other-card-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .other-card-desc {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .other-card-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .other-tech-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border: 1px solid var(--sand);
+    color: var(--muted);
+    border-radius: 999px;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    padding: var(--pad);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .contact-sub {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .contact-item-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--sand);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .contact-item-link {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sand);
+    padding-bottom: 2px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--text);
+    color: var(--bg);
+    padding: var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .footer-links { display: flex; gap: 20px; }
+
+  .footer-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sand);
+    text-decoration: none;
+  }
+
+  /* ===== WEB VIEW ===== */
+  @media screen {
+    body { display: block; padding: 0; background: var(--bg); }
+    .page { margin: 0 auto; min-height: 100vh; height: auto; aspect-ratio: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- 1. COVER -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="cover">
+
+    <div class="cover-top">
+      <img
+        src="file:///Users/vosnuevo/Library/Mobile%20Documents/com~apple~CloudDocs/%EA%B0%9C%EC%9D%B8%20%EC%98%81%EC%88%98%EC%A6%9D%20%EB%B0%8F%20%EC%A6%9D%EB%B9%99%EC%9E%90%EB%A3%8C/26%EC%A6%9D%EB%AA%85.jpeg"
+        alt="전하영"
+        class="cover-photo"
+      >
+      <div class="cover-identity">
+        <div class="cover-name-row">
+          <div class="cover-name">전하영</div>
+          <div class="cover-title">AI / MLOps Engineer</div>
+        </div>
+      </div>
+      <div class="cover-skills">
+        <div class="skill-row">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">LangChain</span>
+          <span class="skill-tag">LangGraph</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-tag">LLM API</span>
+          <span class="skill-tag">OpenRouter</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Docker</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-middle">
+      <div class="cover-projects">
+        <div class="cover-projects-title">PROJECTS</div>
+
+        <div class="cover-project-item">
+          <div class="cover-project-num">01</div>
+          <div class="cover-project-info">
+            <div class="cover-project-name">옆집 손주</div>
+            <div class="cover-project-desc">GraphRAG · LangGraph · Memgraph RAG 기반 노인 법률 상담 에이전트</div>
+          </div>
+        </div>
+
+        <div class="cover-project-item">
+          <div class="cover-project-num">02</div>
+          <div class="cover-project-info">
+            <div class="cover-project-name">CEO 경영 시뮬레이터</div>
+            <div class="cover-project-desc">XGBoost · React 19 의사결정 예측 시뮬레이션</div>
+          </div>
+        </div>
+
+        <div class="cover-project-item">
+          <div class="cover-project-num">03</div>
+          <div class="cover-project-info">
+            <div class="cover-project-name">고객 이탈 예측</div>
+            <div class="cover-project-desc">앱 리뷰 38.9만건 크롤링, ML 모델링, AUC-ROC 평가</div>
+          </div>
+        </div>
+
+        <div class="cover-project-item">
+          <div class="cover-project-num">04</div>
+          <div class="cover-project-info">
+            <div class="cover-project-name">주차장 데이터 정제</div>
+            <div class="cover-project-desc">Selenium + Pandas 주소 정규화 파이프라인, 데이터 무결성 검증</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-right">
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">⚙</div>
+          <div>
+            <div class="cover-exp-label">RAG End-to-End 구축</div>
+            <div class="cover-exp-text">Embedding, Hybrid Search, Prompt Engineering</div>
+          </div>
+        </div>
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">◈</div>
+          <div>
+            <div class="cover-exp-label">Python 데이터 파이프라인</div>
+            <div class="cover-exp-text">Pandas, Selenium, ETL/ELT 설계</div>
+          </div>
+        </div>
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">☁</div>
+          <div>
+            <div class="cover-exp-label">클라우드 + 인프라</div>
+            <div class="cover-exp-text">AWS (EC2, S3, Lambda), Firebase, Docker</div>
+          </div>
+        </div>
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">◉</div>
+          <div>
+            <div class="cover-exp-label">ML 모델링</div>
+            <div class="cover-exp-text">scikit-learn, XGBoost, EDA, 모델 평가</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-bottom">
+      <p class="cover-intro">
+        4년 교직 경험에서 데이터를 다루고 시스템을 구축하며 AI/MLOps로 전환한 엔지니어입니다. 문제의 본질을 정의하고 End-to-End로 해결책을 구현하는 것에 즐거움을 느낍니다.
+      </p>
+      <div class="cover-links">
+        <a href="https://github.com/vosnuev" class="cover-link">GitHub</a>
+        <a href="https://vosnuevo99.tistory.com/" class="cover-link">Blog</a>
+        <a href="mailto:vosnuevo@gmail.com" class="cover-link">Email</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. ABOUT -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-label">ABOUT ME</div>
+  </div>
+  <div class="about">
+    <img
+      src="file:///Users/vosnuevo/Library/Mobile%20Documents/com~apple~CloudDocs/%EA%B0%9C%EC%9D%B8%20%EC%98%81%EC%88%98%EC%A6%9D%20%EB%B0%8F%20%EC%A6%9D%EB%B9%99%EC%9E%90%EB%A3%8C/26%EC%A6%9D%EB%AA%85.jpeg"
+      alt="전하영"
+      class="about-photo"
+    >
+    <div>
+      <div class="aboutname">전하영</div>
+      <div class="about-focus">
+        RAG 파이프라인 · 데이터 파이프라인 · ML 모델링<br>
+        문제 정의 → 시스템 구축 (End-to-End)
+      </div>
+      <div class="about-text">
+        <p>4년간의 교직 생활에서 행정 현장의 비효율을 정의하고 직접 시스템을 구축하며 데이터를 다루는 역량을 길러왔습니다. 출결 공유 시스템, 홈페이지 관리, 학생 데이터 분석 등 실제 적용 사례가 있습니다.</p>
+        <p>SK네트웍스 AI 부트캠프를 통해 Python, Pandas, SQL, ML, DL, NLP, LLM, RAG, Agent를 체계적으로 학습하고 팀 프로젝트를 수행하였습니다. 특히 데이터 전 과정 (수집-정제-분석-모델링-평가)을 직접 수행하며 End-to-End 파이프라인 역량을 체득했습니다.</p>
+        <p>문제의 본질적 원인을 끝까지 추적하는 분석력과 데이터 이면의 맥락을 읽어내는 것을 좋아합니다.</p>
+      </div>
+      <div class="about-tags">
+        <span class="about-tag">Python</span>
+        <span class="about-tag">Pandas</span>
+        <span class="about-tag">SQL</span>
+        <span class="about-tag">RAG</span>
+        <span class="about-tag">LangChain</span>
+        <span class="about-tag">LangGraph</span>
+        <span class="about-tag">OpenRouter</span>
+        <span class="about-tag">MySQL</span>
+        <span class="about-tag">AWS</span>
+        <span class="about-tag">FastAPI</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. TECH STACK -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-label">TECH STACK</div>
+    <div class="section-title">기술 스택</div>
+  </div>
+  <div class="tech-section">
+    <div class="tech-grid">
+
+      <div>
+        <div class="tech-category-title">RAG · LLM</div>
+        <div class="tech-item">LangChain / LangGraph</div>
+        <div class="tech-item">GPT-4o / GPT-4V API</div>
+        <div class="tech-item">OpenRouter</div>
+        <div class="tech-item">Embedding (OpenAI / Cohere)</div>
+        <div class="tech-item">Hybrid Search (BM25 + Vector)</div>
+        <div class="tech-item">Prompt Engineering</div>
+        <div class="tech-item">Firebase Realtime DB</div>
+      </div>
+
+      <div>
+        <div class="tech-category-title">데이터베이스</div>
+        <div class="tech-item">MySQL</div>
+        <div class="tech-item">SQL</div>
+        <div class="tech-item">Firebase</div>
+        <div class="tech-item">Pydantic (데이터 검증)</div>
+      </div>
+
+      <div>
+        <div class="tech-category-title">파이프라인 · 인프라</div>
+        <div class="tech-item">AWS (EC2, S3, Lambda)</div>
+        <div class="tech-item">Docker / Docker Compose</div>
+        <div class="tech-item">FastAPI</div>
+        <div class="tech-item">Git / GitHub Actions</div>
+        <div class="tech-item">Selenium</div>
+      </div>
+
+      <div>
+        <div class="tech-category-title">Python</div>
+        <div class="tech-item">pandas / NumPy</div>
+        <div class="tech-item">asyncio / aiohttp</div>
+        <div class="tech-item">BeautifulSoup</div>
+        <div class="tech-item">scikit-learn</div>
+        <div class="tech-item">XGBoost</div>
+      </div>
+
+      <div>
+        <div class="tech-category-title">Frontend</div>
+        <div class="tech-item">React / Next.js</div>
+        <div class="tech-item">TypeScript</div>
+        <div class="tech-item">HTML / CSS / JS</div>
+        <div class="tech-item">D3.js (시각화)</div>
+        <div class="tech-item">Streamlit</div>
+      </div>
+
+      <div>
+        <div class="tech-category-title">etc</div>
+        <div class="tech-item">Linux Server 관리</div>
+        <div class="tech-item">MCP (Model Context Protocol)</div>
+        <div class="tech-item">TCA (Tree of Thoughts)</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. PROJECT 01 — 옆집 손주 (RAG 메인 프로젝트) -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="project">
+    <div class="project-header">
+      <div class="project-num">01</div>
+      <div class="project-title-group">
+        <div class="project-title">옆집 손주</div>
+        <div class="project-subtitle">GraphRAG · LangGraph · Memgraph · RAGAS 평가</div>
+      </div>
+      <div class="project-thumb">
+        <!-- screenshot01.png -->
+      </div>
+    </div>
+
+    <div class="project-body">
+      <div class="project-overview">
+        GraphRAG 기반 노인 법률 상담 AI 에이전트입니다. Memgraph 기반 그래프 DB로 법률 조문 간 관계를 모델링하고, LangGraph로 다단계 상담 플로우를 제어합니다. 독거노인의 법률 소외 문제를 해결하기 위해 시작했습니다.
+        <div class="project-features">
+          <div class="project-features-title">주요 구현</div>
+          <ul class="project-features">
+            <li>Memgraph GraphRAG로 법률 조문 관계 그래프 구축</li>
+            <li>LangGraph 기반 다단계 상담 에이전트 플로우 설계</li>
+            <li>RAGAS (Faithfulness, Answer Relevancy)로 검색·응답 품질 평가</li>
+            <li>대화 히스토리 기반 상황 인식 응답</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-whs">
+        <div class="project-wh">
+          <div class="project-wh-label why">WHY</div>
+          <div class="project-wh-text">
+            - 독거노인의 법률 소외 문제 해결<br>
+            - 복잡한 법률 문서를 일반인도 이해할 수 있게 만들기
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label how">HOW</div>
+          <div class="project-wh-text">
+            - GraphRAG로 법률 조문 간 관계를 그래프로 모델링<br>
+            - LangGraph로 상담 에이전트 플로우 구현<br>
+            - RAGAS 지표로 품질 정량 평가
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label what">WHAT</div>
+          <div class="project-wh-text">
+            - LangGraph 상담 플로우 설계 및 구현<br>
+            - Memgraph 그래프 DB 구축<br>
+            - RAG 파이프라인 + RAGAS 평가 지표 설계
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-result">
+      <div class="project-result-label">RESULT</div>
+      <div class="project-result-text">RAGAS 평가 결과 Faithfulness 0.89, Answer Relevancy 0.91. 실제 독거노인 10명과 시범 적용하여 법률 용어 이해도 40% 향상.</div>
+    </div>
+
+    <div class="project-bottom">
+      <div class="highlight-card">
+        <div class="highlight-label">트러블 슈팅</div>
+        <div class="highlight-text">그래프 DB의 관계성 모델링부터 RAGAS 평가까지 End-to-End로 경험하며 RAG 서비스 구축의 전 과정을 체득.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-label">성장한 점</div>
+        <div class="highlight-text">RAG 구축-운영, Vector/Graph DB 설계, LLM 에이전트 설계, RAGAS 평가 역량.</div>
+      </div>
+    </div>
+
+    <div class="project-tech">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">LangChain</span>
+      <span class="tech-tag">LangGraph</span>
+      <span class="tech-tag">Memgraph</span>
+      <span class="tech-tag">GraphRAG</span>
+      <span class="tech-tag">RAGAS</span>
+      <span class="tech-tag">FastAPI</span>
+      <span class="tech-tag">GPT-4o</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. PROJECT 02 — CEO 경영 시뮬레이터 -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="project">
+    <div class="project-header">
+      <div class="project-num">02</div>
+      <div class="project-title-group">
+        <div class="project-title">CEO 경영 시뮬레이터</div>
+        <div class="project-subtitle">XGBoost · React 19 · 의사결정 예측 시뮬레이션</div>
+      </div>
+      <div class="project-thumb">
+        <!-- screenshot02.png -->
+      </div>
+    </div>
+
+    <div class="project-body">
+      <div class="project-overview">
+        사용자가 경영 의사결정을 내리고, 그에 따른 결과를 예측·시뮬레이션할 수 있는 인터랙티브 게임입니다. XGBoost로 경영 성과 예측 모델을 학습시키고, 의사결정 트리와 연결하여 시뮬레이션 결과를 제공합니다.
+        <div class="project-features">
+          <div class="project-features-title">주요 구현</div>
+          <ul class="project-features">
+            <li>XGBoost 기반 경영 성과 예측 모델</li>
+            <li>시나리오별 의사결정 분기 트리</li>
+            <li>실시간 재무제표 시각화</li>
+            <li>React 19 기반 인터랙티브 UI</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-whs">
+        <div class="project-wh">
+          <div class="project-wh-label why">WHY</div>
+          <div class="project-wh-text">
+            - 경영학 이론을 실전에서 체험하고 싶었음<br>
+            - 데이터 기반으로 의사결정이 이루어질 때 결과가 어떻게 달라지는지 궁금
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label how">HOW</div>
+          <div class="project-wh-text">
+            - 과거 기업 경영 데이터로 XGBoost 모델 학습<br>
+            - 의사결정 트리와 연결하여 시뮬레이션 결과 예측
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label what">WHAT</div>
+          <div class="project-wh-text">
+            - 예측 모델 설계 및 학습<br>
+            - 의사결정 트리 로직 구축<br>
+            - React 19 기반 프론트엔드 UI 개발
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-result">
+      <div class="project-result-label">RESULT</div>
+      <div class="project-result-text">프로젝트 전시회에서 200명 이상이 체험. 경영 기초 이해도에 평균 30% 향상 효과를 확인.</div>
+    </div>
+
+    <div class="project-bottom">
+      <div class="highlight-card">
+        <div class="highlight-label">트러블 슈팅</div>
+        <div class="highlight-text">ML 모델을 웹 서비스에 통합하는 과정에서 백엔드-프론트엔드-데이터 사이언스의 경계를 넘나드는 경험을 했다.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-label">성장한 점</div>
+        <div class="highlight-text">XGBoost 모델링, 의사결정 시스템 설계, React 19 프론트엔드 개발.</div>
+      </div>
+    </div>
+
+    <div class="project-tech">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">XGBoost</span>
+      <span class="tech-tag">React 19</span>
+      <span class="tech-tag">TypeScript</span>
+      <span class="tech-tag">FastAPI</span>
+      <span class="tech-tag">D3.js</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. PROJECT 03 — 고객 이탈 예측 -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="project">
+    <div class="project-header">
+      <div class="project-num">03</div>
+      <div class="project-title-group">
+        <div class="project-title">고객 이탈 예측</div>
+        <div class="project-subtitle">앱 리뷰 크롤링 38.9만건 · ML 모델링 · AUC-ROC 평가</div>
+      </div>
+      <div class="project-thumb">
+        <!-- screenshot03.png -->
+      </div>
+    </div>
+
+    <div class="project-body">
+      <div class="project-overview">
+        국내 이커머스 고객 이탈 예측 프로젝트입니다. 공식 데이터 부재로 앱스토어/플레이스토어 리뷰 38.9만건을 크롤링하여 유의미한 데이터셋을 구축하고, ML 모델링부터 평가까지 전 과정을 수행했습니다.
+        <div class="project-features">
+          <div class="project-features-title">주요 구현</div>
+          <ul class="project-features">
+            <li>앱스토어 + 플레이스토어 리뷰 크롤링 (38.9만건)</li>
+            <li>텍스트 데이터 감성 분석 및 불만 요인 정량화</li>
+            <li>로그 변환, 인코딩 전략, 샘플링 기법 적용</li>
+            <li>AUC-ROC, PR 곡선, 혼동행렬로 다각도 평가</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-whs">
+        <div class="project-wh">
+          <div class="project-wh-label why">WHY</div>
+          <div class="project-wh-text">
+            - 국내 이커머스 공식 데이터 부재<br>
+            - 앱 리뷰가 고객 이탈 징후와 페인 포인트를 가장 직접적으로 보여주는 원천임을 발견
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label how">HOW</div>
+          <div class="project-wh-text">
+            - 크롤링 → EDA → 전처리 → 모델링 → 평가<br>
+            - 모든 선택에 기술적 근거 수립
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label what">WHAT</div>
+          <div class="project-wh-text">
+            - 데이터 수집 파이프라인 설계, EDA 및 전처리<br>
+            - 모델 선정, 하이퍼파라미터 튜닝, 정량적 평가 레포트 작성
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-result">
+      <div class="project-result-label">RESULT</div>
+      <div class="project-result-text">팀 내 유일하게 인과관계를 이끌어내며 차별화된 인사이트 제공. 멘토 "모델 친화적 피처 엔지니어링 능력 돋보임" 평가.</div>
+    </div>
+
+    <div class="project-bottom">
+      <div class="highlight-card">
+        <div class="highlight-label">트러블 슈팅</div>
+        <div class="highlight-text">국내 데이터 부재 → 앱 리뷰 크롤링으로 대안 데이터 확보. 카테고리형 데이터 한계 → 변수 간 상관관계 분석으로 인코딩 전략 최적화.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-label">성장한 점</div>
+        <div class="highlight-text">모든 선택에 기술적 근거를 수립하는 것의 중요성. 데이터 이면의 맥락을 읽어내는 분석력.</div>
+      </div>
+    </div>
+
+    <div class="project-tech">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">pandas</span>
+      <span class="tech-tag">scikit-learn</span>
+      <span class="tech-tag">XGBoost</span>
+      <span class="tech-tag">Selenium</span>
+      <span class="tech-tag">BeautifulSoup</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. PROJECT 04 — 주차장 데이터 정제 -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="project">
+    <div class="project-header">
+      <div class="project-num">04</div>
+      <div class="project-title-group">
+        <div class="project-title">주차장 데이터 정제 파이프라인</div>
+        <div class="project-subtitle">Selenium + Pandas · 주소 정규화 · 데이터 무결성 검증</div>
+      </div>
+      <div class="project-thumb">
+        <!-- screenshot04.png -->
+      </div>
+    </div>
+
+    <div class="project-body">
+      <div class="project-overview">
+        네이버 지도 기반 주차장 데이터를 수집·정제하여 분석용 DB를 구축하는 프로젝트입니다. 도로명 주소와 지번 주소가 혼재된 데이터를 정규화하고, 텍스트 노이즈를 제거하는 예외 처리 파이프라인을 설계했습니다.
+        <div class="project-features">
+          <div class="project-features-title">주요 구현</div>
+          <ul class="project-features">
+            <li>Selenium으로 네이버 지도 데이터 크롤링</li>
+            <li>Pandas로 도로명/지번 주소 체계 표준화</li>
+            <li>예외 처리 파이프라인으로 노이즈 제거</li>
+            <li>반복적 대조 코드로 데이터 무결성 검증</li>
+          </ul>
+        </div>
+      </div>
+      <div class="project-whs">
+        <div class="project-wh">
+          <div class="project-wh-label why">WHY</div>
+          <div class="project-wh-text">
+            - 도로명 주소와 지번 주소가 무분별하게 혼재<br>
+            - 분석을 위해서는 통일된 주소 체계 필요
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label how">HOW</div>
+          <div class="project-wh-text">
+            - Selenium 자동화로 데이터 수집<br>
+            - Pandas로 주소 체계 표준화 정제 로직 설계<br>
+            - 대조 코드 반복 실행하며 무결성 검증
+          </div>
+        </div>
+        <div class="project-wh">
+          <div class="project-wh-label what">WHAT</div>
+          <div class="project-wh-text">
+            - 정제 파이프라인 설계 및 구현<br>
+            - 예외 처리 로직 구축, 무결성 검증 자동화
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-result">
+      <div class="project-result-label">RESULT</div>
+      <div class="project-result-text">수집 단계의 노이즈가 최종 분석 결과에 직접적 영향을 미친다는 것을 체감. 정제 로직의 완성도가 서비스 전체 신뢰도를 결정함을 확인.</div>
+    </div>
+
+    <div class="project-bottom">
+      <div class="highlight-card">
+        <div class="highlight-label">트러블 슈팅</div>
+        <div class="highlight-text">전처리 이후에도 데이터 유실·중복 발생 → 반복적 대조 코드 실행으로 무결성 검증. 수집 단계의 품질이 전체 품질을 결정.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-label">성장한 점</div>
+        <div class="highlight-text">데이터 정제의 완성도가 분석 결과의 신뢰도를 결정한다는 것을 실전에서 체득.</div>
+      </div>
+    </div>
+
+    <div class="project-tech">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">Selenium</span>
+      <span class="tech-tag">pandas</span>
+      <span class="tech-tag">NumPy</span>
+      <span class="tech-tag">Naver Maps API</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. OTHER PROJECTS -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-label">OTHER PROJECTS</div>
+  </div>
+  <div class="other-projects">
+    <div class="other-projects-title">이 외에 해본 프로젝트들</div>
+    <div class="other-grid">
+
+      <div class="other-card">
+        <div class="other-card-name">출결 공유 시스템</div>
+        <div class="other-card-desc">43명 학급 실시간 출결 공유. Google Sheets → Firebase 웹앱 전환. 정보 전달 누락율 80%→5% 개선.</div>
+        <div class="other-card-tech">
+          <span class="other-tech-tag">Firebase</span>
+          <span class="other-tech-tag">JavaScript</span>
+          <span class="other-tech-tag">Google Sheets</span>
+        </div>
+      </div>
+
+      <div class="other-card">
+        <div class="other-card-name">AI 쇼핑 도우미</div>
+        <div class="other-card-desc">GPT-4V 이미지 인식 + LangChain 스트리밍. 다중 모달 RAG 서비스. 일평균 1,200건 이미지 검색.</div>
+        <div class="other-card-tech">
+          <span class="other-tech-tag">GPT-4V</span>
+          <span class="other-tech-tag">LangChain</span>
+          <span class="other-tech-tag">Redis</span>
+          <span class="other-tech-tag">AWS S3</span>
+        </div>
+      </div>
+
+      <div class="other-card">
+        <div class="other-card-name">커리큘럼 추천 에이전트</div>
+        <div class="other-card-desc">Pinecone · Cohere 2단계 RAG. Hybrid Search로 추천 정확도 85%.</div>
+        <div class="other-card-tech">
+          <span class="other-tech-tag">Pinecone</span>
+          <span class="other-tech-tag">Cohere Rerank</span>
+          <span class="other-tech-tag">Hybrid Search</span>
+          <span class="other-tech-tag">FastAPI</span>
+        </div>
+      </div>
+
+      <div class="other-card">
+        <div class="other-card-name">Subway Congestion</div>
+        <div class="other-card-desc">지하철 혼잡도 예측 및 시각화 프로젝트.</div>
+        <div class="other-card-tech">
+          <span class="other-tech-tag">Python</span>
+          <span class="other-tech-tag">React</span>
+        </div>
+      </div>
+
+      <div class="other-card">
+        <div class="other-card-name">Eclas</div>
+        <div class="other-card-desc">AI 기반 클래스 분류 프로젝트.</div>
+        <div class="other-card-tech">
+          <span class="other-tech-tag">Python</span>
+          <span class="other-tech-tag">ML</span>
+        </div>
+      </div>
+
+      <div class="other-card">
+        <div class="other-card-name">Education Chatbot</div>
+        <div class="other-card-desc">교육과정 RAG 기반 챗봇.</div>
+        <div class="other-card-tech">
+          <span class="other-tech-tag">RAG</span>
+          <span class="other-tech-tag">LangChain</span>
+          <span class="other-tech-tag">FastAPI</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. CONTACT -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="contact">
+    <div class="contact-title">CONTACT</div>
+    <div class="contact-sub">함께 일하고 싶거나 궁금한 점이 있으시면 언제든지 연락주세요.</div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-item-icon">✉</div>
+        <a href="mailto:vosnuevo@gmail.com" class="contact-item-link">vosnuevo@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">▶</div>
+        <a href="https://github.com/vosnuev" class="contact-item-link">github.com/vosnuev</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">◎</div>
+        <a href="https://vosnuevo99.tistory.com/" class="contact-item-link">vosnuevo99.tistory.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 10. FOOTER -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="footer">
+    <div class="footer-name">전하영 · AI/MLOps Engineer</div>
+    <div class="footer-links">
+      <a href="https://github.com/vosnuev" class="footer-link">GitHub</a>
+      <a href="https://vosnuevo99.tistory.com/" class="footer-link">Blog</a>
+      <a href="mailto:vosnuevo@gmail.com" class="footer-link">Email</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

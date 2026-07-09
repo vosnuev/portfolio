@@ -46,7 +46,7 @@
     flex-shrink: 0;
   }
 
-  /* ===== TIMELINE (공통 하단 — 유튜브 세션바 스타일) ===== */
+  /* ===== TIMELINE ===== */
   .timeline {
     position: absolute;
     bottom: 42px;
@@ -69,12 +69,9 @@
     height: 100%;
     background: var(--sand);
     border-radius: 2px;
-    transition: background 0.2s;
   }
 
-  .timeline-seg.active {
-    background: var(--accent);
-  }
+  .timeline-seg.active { background: var(--accent); }
 
   .timeline-labels {
     display: flex;
@@ -91,9 +88,7 @@
     white-space: nowrap;
   }
 
-  .timeline-label-item.active {
-    color: var(--accent);
-  }
+  .timeline-label-item.active { color: var(--accent); }
 
   .page-num {
     position: absolute;
@@ -112,7 +107,6 @@
     padding-bottom: 56px;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    gap: 0;
   }
 
   .cover-top {
@@ -176,7 +170,6 @@
     border-radius: 999px;
   }
 
-  /* ===== COVER MIDDLE ===== */
   .cover-middle {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -187,7 +180,6 @@
   .cover-projects {
     display: flex;
     flex-direction: column;
-    gap: 0;
   }
 
   .cover-projects-title {
@@ -229,7 +221,6 @@
     margin-top: 2px;
   }
 
-  /* cover-right icons */
   .cover-right {
     display: flex;
     flex-direction: column;
@@ -269,7 +260,6 @@
     color: var(--muted);
   }
 
-  /* ===== COVER BOTTOM ===== */
   .cover-bottom {
     padding-top: 20px;
     border-top: 1.5px solid var(--sand);
@@ -318,7 +308,7 @@
   /* ===== ABOUT ===== */
   .about {
     padding: var(--pad);
-    padding-bottom: 56px;
+    padding-bottom: 100px;
     display: grid;
     grid-template-columns: 200px 1fr;
     gap: 40px;
@@ -380,7 +370,7 @@
   }
 
   /* ===== TECH STACK ===== */
-  .tech-section { padding: var(--pad); padding-bottom: 56px; }
+  .tech-section { padding: var(--pad); padding-bottom: 100px; }
 
   .tech-grid {
     display: grid;
@@ -403,32 +393,24 @@
     font-weight: 400;
     line-height: 2;
     color: var(--muted);
-    padding-left: 22px;
-    position: relative;
-  }
-
-  .tech-item::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    font-size: 10px;
-    top: 2px;
-    color: var(--sand);
   }
 
   /* ===== PROJECT ===== */
   .project {
     padding: var(--pad);
-    padding-bottom: 56px;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .project-header {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
     border-bottom: 1.5px solid var(--sand);
+    margin-bottom: 10px;
   }
 
   .project-num {
@@ -444,6 +426,7 @@
     font-size: 32px;
     font-weight: 900;
     color: var(--text);
+    line-height: 1.1;
   }
 
   .project-subtitle {
@@ -453,36 +436,55 @@
     margin-top: 4px;
   }
 
-  .project-thumb {
-    width: 360px;
-    height: 200px;
-    border-radius: 8px;
-    overflow: hidden;
+  /* RESULT / EVALUATION — below title */
+  .project-result-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .project-result-item {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+
+  .project-result-quote {
+    font-size: 13px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .project-result-quote::before { content: '"'; }
+  .project-result-quote::after { content: '"'; }
+
+  .project-result-source {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
     flex-shrink: 0;
-    background: var(--sand);
   }
 
-  .project-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
+  /* ===== PROJECT BODY (2-column) ===== */
   .project-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 16px;
+    gap: 16px;
+    margin-bottom: 10px;
   }
 
   .project-overview {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     line-height: 1.8;
     color: var(--muted);
   }
 
-  .project-features { margin-top: 14px; }
+  .project-features { margin-top: 10px; }
 
   .project-features-title {
     font-size: 11px;
@@ -493,12 +495,12 @@
   }
 
   .project-features li {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.7;
     color: var(--muted);
     list-style: none;
-    padding-left: 12px;
+    padding-left: 10px;
     position: relative;
   }
 
@@ -507,27 +509,27 @@
     position: absolute;
     left: 0;
     color: var(--accent);
-    font-size: 7px;
-    top: 5px;
+    font-size: 6px;
+    top: 4px;
   }
 
   .project-whs {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   .project-wh {
     background: var(--white);
-    border-radius: 8px;
-    padding: 14px 18px;
+    border-radius: 6px;
+    padding: 10px 14px;
   }
 
   .project-wh-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 900;
     letter-spacing: 0.08em;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .project-wh-label.why { color: var(--accent); }
@@ -535,63 +537,49 @@
   .project-wh-label.what { color: var(--text); }
 
   .project-wh-text {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.65;
     color: var(--muted);
-  }
-
-  .project-result {
-    background: var(--sand);
-    border-radius: 8px;
-    padding: 14px 18px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    margin-bottom: 14px;
-  }
-
-  .project-result-label {
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    white-space: nowrap;
-  }
-
-  .project-result-text {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--text);
   }
 
   .project-bottom {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: 10px;
+    margin-bottom: 10px;
   }
 
   .highlight-card {
     background: var(--white);
-    border-radius: 8px;
-    padding: 16px 20px;
+    border-radius: 6px;
+    padding: 12px 16px;
   }
 
   .highlight-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 900;
     color: var(--accent);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .highlight-text {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.65;
     color: var(--muted);
   }
+
+  .project-thumb {
+    width: 360px;
+    height: 190px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--sand);
+  }
+
+  .project-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
   .project-tech {
     display: flex;
@@ -611,7 +599,7 @@
   /* ===== OTHER PROJECTS ===== */
   .other-projects {
     padding: var(--pad);
-    padding-bottom: 56px;
+    padding-bottom: 100px;
   }
 
   .other-projects-title {
@@ -670,7 +658,7 @@
   /* ===== CONTACT ===== */
   .contact {
     padding: var(--pad);
-    padding-bottom: 56px;
+    padding-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -860,7 +848,6 @@
       </div>
     </div>
   </div>
-
   <div class="page-num">1 / 9</div>
 </div>
 
@@ -888,7 +875,7 @@
       <div class="about-text">
         <p>4년간 교직을 하며 행정 현장의 비효율을 정의하고 직접 시스템을 구축했습니다. 출결 공유 시스템, 홈페이지 관리, 학생 데이터 분석 등 교사 경력 속에서도 실제 작동하는 시스템을 만든 경험이 있습니다.</p>
         <p>SK네트웍스 AI 부트캠프에서 Python, RAG, Agent까지 End-to-End로 학습하며, 데이터 수집에서 평가까지 전 과정을 직접 수행한 파이프라인 역량을 길렀습니다. 특히 단순히 구현하는 것을 넘어 "왜 이렇게 했는지, 이를 통해 무엇을 확인하고 싶었는지"를 명확히 설명할 수 있는 편입니다.</p>
-        <p>교사 경력에서 단련된 사람 관찰력과 갈등 조정 경험을 바탕으로, 팀 내에서 문제의 본질을 먼저 정의하고각 관계자의 의견을 수렴하여 합의점을 이끄는 역할을 합니다. "마음은 그렇지 않은데 말을 예쁘게 못하고 있는 것"을 감별하고, 팀 분위기를 긍정적으로 전환하는 데 익숙합니다.</p>
+        <p>교사 경력에서 단련된 사람 관찰력과 갈등 조정 경험을 바탕으로, 팀 내에서 문제의 본질을 먼저 정의하고 각 관계자의 의견을 수렴하여 합의점을 이끄는 역할을 합니다. "마음은 그렇지 않은데 말을 예쁘게 못하고 있는 것"을 감별하고, 팀 분위기를 긍정적으로 전환하는 데 익숙합니다.</p>
       </div>
       <div class="about-tags">
         <span class="about-tag">Python</span>
@@ -930,7 +917,8 @@
       <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">2 / 9</div>>
+  <div class="page-num">2 / 9</div>
+</div>
 
 <!-- ============================================================ -->
 <!-- 3. TECH STACK -->
@@ -1030,10 +1018,11 @@
       <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">3 / 9</div>>
+  <div class="page-num">3 / 9</div>
+</div>
 
 <!-- ============================================================ -->
-<!-- 4. PROJECT 01 — 옆집 손주 (RAG 메인 프로젝트) -->
+<!-- 4. PROJECT 01 — 옆집 손주 -->
 <!-- ============================================================ -->
 <div class="page">
   <div class="project">
@@ -1048,6 +1037,15 @@
       </div>
     </div>
 
+    <div class="project-result-bar">
+      <div class="project-result-item">
+        <span class="project-result-quote">RAGAS 평가 결과 Faithfulness 0.89, Answer Relevancy 0.91</span>
+      </div>
+      <div class="project-result-item">
+        <span class="project-result-quote">실제 독거노인 10명과 시범 적용하여 법률 용어 이해도 40% 향상</span>
+      </div>
+    </div>
+
     <div class="project-body">
       <div class="project-overview">
         GraphRAG 기반 노인 법률 상담 AI 에이전트입니다. Memgraph 기반 그래프 DB로 법률 조문 간 관계를 모델링하고, LangGraph로 다단계 상담 플로우를 제어합니다. 독거노인의 법률 소외 문제를 해결하기 위해 시작했습니다.
@@ -1056,7 +1054,7 @@
           <ul class="project-features">
             <li>Memgraph GraphRAG로 법률 조문 관계 그래프 구축</li>
             <li>LangGraph 기반 다단계 상담 에이전트 플로우 설계</li>
-            <li>RAGAS (Faithfulness, Answer Relevancy)로 검색·응답 품질 평가</li>
+            <li>RAGAS로 검색 응답 품질 정량 평가</li>
             <li>대화 히스토리 기반 상황 인식 응답</li>
           </ul>
         </div>
@@ -1064,33 +1062,17 @@
       <div class="project-whs">
         <div class="project-wh">
           <div class="project-wh-label why">WHY</div>
-          <div class="project-wh-text">
-            - 독거노인의 법률 소외 문제 해결<br>
-            - 복잡한 법률 문서를 일반인도 이해할 수 있게 만들기
-          </div>
+          <div class="project-wh-text">독거노인의 법률 소외 문제 해결, 복잡한 법률 문서를 일반인도 이해할 수 있게 만들기</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label how">HOW</div>
-          <div class="project-wh-text">
-            - GraphRAG로 법률 조문 간 관계를 그래프로 모델링<br>
-            - LangGraph로 상담 에이전트 플로우 구현<br>
-            - RAGAS 지표로 품질 정량 평가
-          </div>
+          <div class="project-wh-text">GraphRAG로 법령 간 관계 그래프 모델링, LangGraph로 상담 에이전트 플로우 구현, RAGAS 지표로 품질 평가</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label what">WHAT</div>
-          <div class="project-wh-text">
-            - LangGraph 상담 플로우 설계 및 구현<br>
-            - Memgraph 그래프 DB 구축<br>
-            - RAG 파이프라인 + RAGAS 평가 지표 설계
-          </div>
+          <div class="project-wh-text">LangGraph 상담 플로우 설계 및 구현, Memgraph 그래프 DB 구축, RAG 파이프라인 + RAGAS 평가 지표 설계</div>
         </div>
       </div>
-    </div>
-
-    <div class="project-result">
-      <div class="project-result-label">RESULT</div>
-      <div class="project-result-text">RAGAS 평가 결과 Faithfulness 0.89, Answer Relevancy 0.91. 실제 독거노인 10명과 시범 적용하여 법률 용어 이해도 40% 향상.</div>
     </div>
 
     <div class="project-bottom">
@@ -1163,9 +1145,15 @@
       </div>
     </div>
 
+    <div class="project-result-bar">
+      <div class="project-result-item">
+        <span class="project-result-quote">프로젝트 전시회에서 200명 이상이 체험, 경영 기초 이해도 평균 30% 향상</span>
+      </div>
+    </div>
+
     <div class="project-body">
       <div class="project-overview">
-        사용자가 경영 의사결정을 내리고, 그에 따른 결과를 예측·시뮬레이션할 수 있는 인터랙티브 게임입니다. XGBoost로 경영 성과 예측 모델을 학습시키고, 의사결정 트리와 연결하여 시뮬레이션 결과를 제공합니다.
+        사용자가 경영 의사결정을 내리고 그에 따른 결과를 예측 시뮬레이션할 수 있는 인터랙티브 게임입니다. XGBoost로 경영 성과 예측 모델을 학습시키고, 의사결정 트리와 연결하여 시뮬레이션 결과를 제공합니다.
         <div class="project-features">
           <div class="project-features-title">주요 구현</div>
           <ul class="project-features">
@@ -1179,32 +1167,17 @@
       <div class="project-whs">
         <div class="project-wh">
           <div class="project-wh-label why">WHY</div>
-          <div class="project-wh-text">
-            - 경영학 이론을 실전에서 체험하고 싶었음<br>
-            - 데이터 기반으로 의사결정이 이루어질 때 결과가 어떻게 달라지는지 궁금
-          </div>
+          <div class="project-wh-text">경영학 이론을 실전에서 체험하고 싶었음, 데이터 기반으로 의사결정이 이루어질 때 결과가 어떻게 달라지는지 궁금</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label how">HOW</div>
-          <div class="project-wh-text">
-            - 과거 기업 경영 데이터로 XGBoost 모델 학습<br>
-            - 의사결정 트리와 연결하여 시뮬레이션 결과 예측
-          </div>
+          <div class="project-wh-text">과거 기업 경영 데이터로 XGBoost 모델 학습, 의사결정 트리와 연결하여 시뮬레이션 결과 예측</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label what">WHAT</div>
-          <div class="project-wh-text">
-            - 예측 모델 설계 및 학습<br>
-            - 의사결정 트리 로직 구축<br>
-            - React 19 기반 프론트엔드 UI 개발
-          </div>
+          <div class="project-wh-text">예측 모델 설계 및 학습, 의사결정 트리 로직 구축, React 19 기반 프론트엔드 UI 개발</div>
         </div>
       </div>
-    </div>
-
-    <div class="project-result">
-      <div class="project-result-label">RESULT</div>
-      <div class="project-result-text">프로젝트 전시회에서 200명 이상이 체험. 경영 기초 이해도에 평균 30% 향상 효과를 확인.</div>
     </div>
 
     <div class="project-bottom">
@@ -1253,7 +1226,8 @@
       <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">5 / 9</div>>
+  <div class="page-num">5 / 9</div>
+</div>
 
 <!-- ============================================================ -->
 <!-- 6. PROJECT 03 — 고객 이탈 예측 -->
@@ -1268,6 +1242,16 @@
       </div>
       <div class="project-thumb">
         <!-- screenshot03.png -->
+      </div>
+    </div>
+
+    <div class="project-result-bar">
+      <div class="project-result-item">
+        <span class="project-result-quote">팀 내 유일하게 인과관계를 이끌어내며 차별화된 인사이트 제공</span>
+      </div>
+      <div class="project-result-item">
+        <span class="project-result-quote">모델 친화적 피처 엔지니어링 능력 돋보임</span>
+        <span class="project-result-source">- 멘토 -</span>
       </div>
     </div>
 
@@ -1287,31 +1271,17 @@
       <div class="project-whs">
         <div class="project-wh">
           <div class="project-wh-label why">WHY</div>
-          <div class="project-wh-text">
-            - 국내 이커머스 공식 데이터 부재<br>
-            - 앱 리뷰가 고객 이탈 징후와 페인 포인트를 가장 직접적으로 보여주는 원천임을 발견
-          </div>
+          <div class="project-wh-text">국내 이커머스 공식 데이터 부재, 앱 리뷰가 고객 이탈 징후와 페인 포인트를 가장 직접적으로 보여주는 원천임을 발견</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label how">HOW</div>
-          <div class="project-wh-text">
-            - 크롤링 → EDA → 전처리 → 모델링 → 평가<br>
-            - 모든 선택에 기술적 근거 수립
-          </div>
+          <div class="project-wh-text">크롤링 → EDA → 전처리 → 모델링 → 평가, 모든 선택에 기술적 근거 수립</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label what">WHAT</div>
-          <div class="project-wh-text">
-            - 데이터 수집 파이프라인 설계, EDA 및 전처리<br>
-            - 모델 선정, 하이퍼파라미터 튜닝, 정량적 평가 레포트 작성
-          </div>
+          <div class="project-wh-text">데이터 수집 파이프라인 설계, EDA 및 전처리, 모델 선정, 하이퍼파라미터 튜닝, 정량적 평가 레포트 작성</div>
         </div>
       </div>
-    </div>
-
-    <div class="project-result">
-      <div class="project-result-label">RESULT</div>
-      <div class="project-result-text">팀 내 유일하게 인과관계를 이끌어내며 차별화된 인사이트 제공. 멘토 "모델 친화적 피처 엔지니어링 능력 돋보임" 평가.</div>
     </div>
 
     <div class="project-bottom">
@@ -1360,7 +1330,8 @@
       <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">6 / 9</div>>
+  <div class="page-num">6 / 9</div>
+</div>
 
 <!-- ============================================================ -->
 <!-- 7. PROJECT 04 — 주차장 데이터 정제 -->
@@ -1378,9 +1349,18 @@
       </div>
     </div>
 
+    <div class="project-result-bar">
+      <div class="project-result-item">
+        <span class="project-result-quote">수집 단계의 노이즈가 최종 분석 결과에 직접적 영향을 미친다는 것을 체감</span>
+      </div>
+      <div class="project-result-item">
+        <span class="project-result-quote">정제 로직의 완성도가 서비스 전체 신뢰도를 결정함을 확인</span>
+      </div>
+    </div>
+
     <div class="project-body">
       <div class="project-overview">
-        네이버 지도 기반 주차장 데이터를 수집·정제하여 분석용 DB를 구축하는 프로젝트입니다. 도로명 주소와 지번 주소가 혼재된 데이터를 정규화하고, 텍스트 노이즈를 제거하는 예외 처리 파이프라인을 설계했습니다.
+        네이버 지도 기반 주차장 데이터를 수집 정제하여 분석용 DB를 구축하는 프로젝트입니다. 도로명 주소와 지번 주소가 혼재된 데이터를 정규화하고, 텍스트 노이즈를 제거하는 예외 처리 파이프라인을 설계했습니다.
         <div class="project-features">
           <div class="project-features-title">주요 구현</div>
           <ul class="project-features">
@@ -1394,38 +1374,23 @@
       <div class="project-whs">
         <div class="project-wh">
           <div class="project-wh-label why">WHY</div>
-          <div class="project-wh-text">
-            - 도로명 주소와 지번 주소가 무분별하게 혼재<br>
-            - 분석을 위해서는 통일된 주소 체계 필요
-          </div>
+          <div class="project-wh-text">도로명 주소와 지번 주소가 무분별하게 혼재, 분석을 위해서는 통일된 주소 체계 필요</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label how">HOW</div>
-          <div class="project-wh-text">
-            - Selenium 자동화로 데이터 수집<br>
-            - Pandas로 주소 체계 표준화 정제 로직 설계<br>
-            - 대조 코드 반복 실행하며 무결성 검증
-          </div>
+          <div class="project-wh-text">Selenium 자동화로 데이터 수집, Pandas로 주소 체계 표준화 정제 로직 설계, 대조 코드 반복 실행하며 무결성 검증</div>
         </div>
         <div class="project-wh">
           <div class="project-wh-label what">WHAT</div>
-          <div class="project-wh-text">
-            - 정제 파이프라인 설계 및 구현<br>
-            - 예외 처리 로직 구축, 무결성 검증 자동화
-          </div>
+          <div class="project-wh-text">정제 파이프라인 설계 및 구현, 예외 처리 로직 구축, 무결성 검증 자동화</div>
         </div>
       </div>
-    </div>
-
-    <div class="project-result">
-      <div class="project-result-label">RESULT</div>
-      <div class="project-result-text">수집 단계의 노이즈가 최종 분석 결과에 직접적 영향을 미친다는 것을 체감. 정제 로직의 완성도가 서비스 전체 신뢰도를 결정함을 확인.</div>
     </div>
 
     <div class="project-bottom">
       <div class="highlight-card">
         <div class="highlight-label">트러블 슈팅</div>
-        <div class="highlight-text">전처리 이후에도 데이터 유실·중복 발생 → 반복적 대조 코드 실행으로 무결성 검증. 수집 단계의 품질이 전체 품질을 결정.</div>
+        <div class="highlight-text">전처리 이후에도 데이터 유실 중복 발생 → 반복적 대조 코드 실행으로 무결성 검증. 수집 단계의 품질이 전체 품질을 결정.</div>
       </div>
       <div class="highlight-card">
         <div class="highlight-label">성장한 점</div>
@@ -1468,7 +1433,8 @@
       <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">7 / 9</div>>
+  <div class="page-num">7 / 9</div>
+</div>
 
 <!-- ============================================================ -->
 <!-- 8. OTHER PROJECTS -->
@@ -1569,7 +1535,8 @@
       <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">8 / 9</div>>
+  <div class="page-num">8 / 9</div>
+</div>
 
 <!-- ============================================================ -->
 <!-- 9. CONTACT -->
@@ -1619,7 +1586,8 @@
       <div class="timeline-label-item active">Contact</div>
     </div>
   </div>
-  <div class="page-num">9 / 9</div>>
+  <div class="page-num">9 / 9</div>
+</div>
 
 </body>
 </html>

@@ -46,64 +46,54 @@
     flex-shrink: 0;
   }
 
-  /* ===== TIMELINE (공통 하단) ===== */
+  /* ===== TIMELINE (공통 하단 — 유튜브 세션바 스타일) ===== */
   .timeline {
     position: absolute;
-    bottom: 22px;
-    left: 0;
-    right: 0;
+    bottom: 18px;
+    left: var(--pad);
+    right: var(--pad);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 0 var(--pad);
-  }
-
-  .timeline-track {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-
-  .timeline-dot {
-    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 5px;
-    padding: 0 10px;
-    cursor: default;
   }
 
-  .timeline-dot::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+  .timeline-bar {
+    display: flex;
+    width: 100%;
+    height: 4px;
+    gap: 2px;
+  }
+
+  .timeline-seg {
+    flex: 1;
+    height: 100%;
     background: var(--sand);
-    flex-shrink: 0;
+    border-radius: 2px;
+    transition: background 0.2s;
   }
 
-  .timeline-dot.active::before {
+  .timeline-seg.active {
     background: var(--accent);
-    width: 8px;
-    height: 8px;
   }
 
-  .timeline-label {
-    font-size: 9px;
+  .timeline-labels {
+    display: flex;
+    width: 100%;
+  }
+
+  .timeline-label-item {
+    flex: 1;
+    text-align: center;
+    font-size: 8px;
     font-weight: 700;
     color: var(--sand);
+    letter-spacing: 0.03em;
     white-space: nowrap;
-    letter-spacing: 0.04em;
   }
 
-  .timeline-dot.active .timeline-label {
+  .timeline-label-item.active {
     color: var(--accent);
-  }
-
-  .timeline-sep {
-    color: var(--sand);
-    font-size: 9px;
-    opacity: 0.5;
   }
 
   .page-num {
@@ -419,11 +409,12 @@
   }
 
   .tech-item::before {
-    content: attr(data-icon);
+    content: '▸';
     position: absolute;
     left: 0;
-    font-size: 11px;
-    top: 1px;
+    font-size: 10px;
+    top: 2px;
+    color: var(--sand);
   }
 
   /* ===== PROJECT ===== */
@@ -635,6 +626,7 @@
   .other-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     gap: 16px;
   }
 
@@ -642,13 +634,15 @@
     background: var(--white);
     border-radius: 8px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .other-card-name {
     font-size: 14px;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 6px;
   }
 
   .other-card-desc {
@@ -656,7 +650,7 @@
     font-weight: 400;
     line-height: 1.6;
     color: var(--muted);
-    margin-bottom: 10px;
+    flex: 1;
   }
 
   .other-card-tech {
@@ -870,28 +864,30 @@
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot active"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item active">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">1 / 9</div>
-</div>
+  <div class="page-num">1 / 9</div>>
 
 <!-- ============================================================ -->
 <!-- 2. ABOUT -->
@@ -936,28 +932,30 @@
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item active">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">2 / 9</div>
-</div>
+  <div class="page-num">2 / 9</div>>
 
 <!-- ============================================================ -->
 <!-- 3. TECH STACK -->
@@ -971,56 +969,62 @@
     <div class="tech-grid">
 
       <div>
-        <div class="tech-category-title">🤖 RAG · LLM</div>
-        <div class="tech-item" data-icon="◈">LangChain / LangGraph</div>
-        <div class="tech-item" data-icon="◈">GPT-4o / GPT-4V API</div>
-        <div class="tech-item" data-icon="◈">OpenRouter</div>
-        <div class="tech-item" data-icon="◈">Embedding (OpenAI / Cohere)</div>
-        <div class="tech-item" data-icon="◈">Hybrid Search (BM25 + Vector)</div>
-        <div class="tech-item" data-icon="◈">Prompt Engineering</div>
-        <div class="tech-item" data-icon="◈">Firebase Realtime DB</div>
+        <div class="tech-category-title">RAG · LLM</div>
+        <div class="tech-item">LangChain / LangGraph</div>
+        <div class="tech-item">GPT-4o / GPT-4V API</div>
+        <div class="tech-item">OpenRouter</div>
+        <div class="tech-item">Embedding (OpenAI / Cohere)</div>
+        <div class="tech-item">Hybrid Search (BM25 + Vector)</div>
+        <div class="tech-item">Pinecone (Vector DB)</div>
+        <div class="tech-item">Cohere Rerank</div>
+        <div class="tech-item">Prompt Engineering</div>
+        <div class="tech-item">Redis</div>
       </div>
 
       <div>
-        <div class="tech-category-title">🗄️ 데이터베이스</div>
-        <div class="tech-item" data-icon="◈">MySQL</div>
-        <div class="tech-item" data-icon="◈">SQL</div>
-        <div class="tech-item" data-icon="◈">Firebase</div>
-        <div class="tech-item" data-icon="◈">Pydantic (데이터 검증)</div>
+        <div class="tech-category-title">데이터베이스</div>
+        <div class="tech-item">MySQL</div>
+        <div class="tech-item">SQL</div>
+        <div class="tech-item">Firebase</div>
+        <div class="tech-item">Memgraph (Graph DB)</div>
+        <div class="tech-item">Pydantic (데이터 검증)</div>
       </div>
 
       <div>
-        <div class="tech-category-title">☁️ 파이프라인 · 인프라</div>
-        <div class="tech-item" data-icon="◈">AWS (EC2, S3, Lambda)</div>
-        <div class="tech-item" data-icon="◈">Docker / Docker Compose</div>
-        <div class="tech-item" data-icon="◈">FastAPI</div>
-        <div class="tech-item" data-icon="◈">Git / GitHub Actions</div>
-        <div class="tech-item" data-icon="◈">Selenium</div>
+        <div class="tech-category-title">파이프라인 · 인프라</div>
+        <div class="tech-item">AWS (EC2, S3, Lambda)</div>
+        <div class="tech-item">Docker / Docker Compose</div>
+        <div class="tech-item">FastAPI</div>
+        <div class="tech-item">Git / GitHub Actions</div>
+        <div class="tech-item">Selenium / BeautifulSoup</div>
+        <div class="tech-item">MCP (Model Context Protocol)</div>
       </div>
 
       <div>
-        <div class="tech-category-title">🐍 Python</div>
-        <div class="tech-item" data-icon="◈">pandas / NumPy</div>
-        <div class="tech-item" data-icon="◈">asyncio / aiohttp</div>
-        <div class="tech-item" data-icon="◈">BeautifulSoup</div>
-        <div class="tech-item" data-icon="◈">scikit-learn</div>
-        <div class="tech-item" data-icon="◈">XGBoost</div>
+        <div class="tech-category-title">Python</div>
+        <div class="tech-item">pandas / NumPy</div>
+        <div class="tech-item">asyncio / aiohttp</div>
+        <div class="tech-item">scikit-learn</div>
+        <div class="tech-item">XGBoost</div>
+        <div class="tech-item">Streamlit</div>
       </div>
 
       <div>
-        <div class="tech-category-title">💻 Frontend</div>
-        <div class="tech-item" data-icon="◈">React / Next.js</div>
-        <div class="tech-item" data-icon="◈">TypeScript</div>
-        <div class="tech-item" data-icon="◈">HTML / CSS / JS</div>
-        <div class="tech-item" data-icon="◈">D3.js (시각화)</div>
-        <div class="tech-item" data-icon="◈">Streamlit</div>
+        <div class="tech-category-title">Frontend</div>
+        <div class="tech-item">React / Next.js</div>
+        <div class="tech-item">TypeScript</div>
+        <div class="tech-item">HTML / CSS / JS</div>
+        <div class="tech-item">Plotly (시각화)</div>
+        <div class="tech-item">Folium (지도 시각화)</div>
       </div>
 
       <div>
-        <div class="tech-category-title">⚙️ etc</div>
-        <div class="tech-item" data-icon="◈">Linux Server 관리</div>
-        <div class="tech-item" data-icon="◈">MCP (Model Context Protocol)</div>
-        <div class="tech-item" data-icon="◈">TCA (Tree of Thoughts)</div>
+        <div class="tech-category-title">ML · 데이터</div>
+        <div class="tech-item">scikit-learn</div>
+        <div class="tech-item">XGBoost</div>
+        <div class="tech-item">EDA (탐색적 분석)</div>
+        <div class="tech-item">모델 평가 (AUC-ROC, RAGAS)</div>
+        <div class="tech-item">피처 엔지니어링</div>
       </div>
 
     </div>
@@ -1028,28 +1032,30 @@
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item active">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">3 / 9</div>
-</div>
+  <div class="page-num">3 / 9</div>>
 
 <!-- ============================================================ -->
 <!-- 4. PROJECT 01 — 옆집 손주 (RAG 메인 프로젝트) -->
@@ -1132,29 +1138,35 @@
       <span class="tech-tag">RAGAS</span>
       <span class="tech-tag">FastAPI</span>
       <span class="tech-tag">GPT-4o</span>
+      <span class="tech-tag">Redis</span>
+      <span class="tech-tag">MCP</span>
+      <span class="tech-tag">React 19</span>
     </div>
   </div>
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item active">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
   <div class="page-num">4 / 9</div>
@@ -1237,34 +1249,36 @@
       <span class="tech-tag">React 19</span>
       <span class="tech-tag">TypeScript</span>
       <span class="tech-tag">FastAPI</span>
-      <span class="tech-tag">D3.js</span>
+      <span class="tech-tag">Plotly</span>
     </div>
   </div>
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item active">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">5 / 9</div>
-</div>
+  <div class="page-num">5 / 9</div>>
 
 <!-- ============================================================ -->
 <!-- 6. PROJECT 03 — 고객 이탈 예측 -->
@@ -1348,28 +1362,30 @@
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item active">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">6 / 9</div>
-</div>
+  <div class="page-num">6 / 9</div>>
 
 <!-- ============================================================ -->
 <!-- 7. PROJECT 04 — 주차장 데이터 정제 -->
@@ -1446,35 +1462,38 @@
       <span class="tech-tag">Python</span>
       <span class="tech-tag">Selenium</span>
       <span class="tech-tag">pandas</span>
-      <span class="tech-tag">NumPy</span>
-      <span class="tech-tag">Naver Maps API</span>
+      <span class="tech-tag">MySQL</span>
+      <span class="tech-tag">Plotly</span>
+      <span class="tech-tag">Folium</span>
     </div>
   </div>
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item active">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">7 / 9</div>
-</div>
+  <div class="page-num">7 / 9</div>>
 
 <!-- ============================================================ -->
 <!-- 8. OTHER PROJECTS -->
@@ -1552,28 +1571,30 @@
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+      <div class="timeline-seg"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item active">기타</div>
+      <div class="timeline-label-item">Contact</div>
     </div>
   </div>
-  <div class="page-num">8 / 9</div>
-</div>
+  <div class="page-num">8 / 9</div>>
 
 <!-- ============================================================ -->
 <!-- 9. CONTACT -->
@@ -1600,28 +1621,30 @@
 
   <!-- Timeline -->
   <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-dot"><span class="timeline-label">Cover</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">자기소개</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기술스택</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">옆집손주</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">CEO시뮬</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">고객이탈</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">주차장</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot"><span class="timeline-label">기타프로젝트</span></div>
-      <span class="timeline-sep">·</span>
-      <div class="timeline-dot active"><span class="timeline-label">Contact</span></div>
+    <div class="timeline-bar">
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg"></div>
+      <div class="timeline-seg active"></div>
+    </div>
+    <div class="timeline-labels">
+      <div class="timeline-label-item">Cover</div>
+      <div class="timeline-label-item">자기소개</div>
+      <div class="timeline-label-item">기술스택</div>
+      <div class="timeline-label-item">옆집손주</div>
+      <div class="timeline-label-item">CEO시뮬</div>
+      <div class="timeline-label-item">고객이탈</div>
+      <div class="timeline-label-item">주차장</div>
+      <div class="timeline-label-item">기타</div>
+      <div class="timeline-label-item active">Contact</div>
     </div>
   </div>
-  <div class="page-num">9 / 9</div>
-</div>
+  <div class="page-num">9 / 9</div>>
 
 </body>
 </html>

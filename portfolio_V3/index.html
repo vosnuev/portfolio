@@ -245,27 +245,24 @@
     gap: 10px;
   }
 
-  /* RESULT badge — circular */
+  /* RESULT badge — filled pill */
   .cover-result-badge {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .cover-result-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    justify-content: center;
     background: var(--accent);
+    border-radius: 999px;
+    padding: 4px 12px;
     flex-shrink: 0;
   }
 
   .cover-result-text {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    color: var(--text);
+    color: var(--bg);
     white-space: nowrap;
+    line-height: 1.3;
+    text-align: center;
   }
 
   .cover-exp-icon {
@@ -823,8 +820,7 @@
           </div>
         </div>
         <div class="cover-result-badge">
-          <div class="cover-result-dot"></div>
-          <div class="cover-result-text">RAGAS 0.89 / 법률 이해도 40%↑</div>
+          <div class="cover-result-text">독거노인 10명 시범 적용 / 법률 이해도 40%↑</div>
         </div>
       </div>
 
@@ -844,7 +840,6 @@
           </div>
         </div>
         <div class="cover-result-badge">
-          <div class="cover-result-dot"></div>
           <div class="cover-result-text">200명+ 체험 / 이해도 30%↑</div>
         </div>
       </div>
@@ -865,8 +860,7 @@
           </div>
         </div>
         <div class="cover-result-badge">
-          <div class="cover-result-dot"></div>
-          <div class="cover-result-text">인과관계 도출 / 피처 엔지니어링</div>
+          <div class="cover-result-text">0건 → 38.9만건 데이터 수집</div>
         </div>
       </div>
 
@@ -886,7 +880,6 @@
           </div>
         </div>
         <div class="cover-result-badge">
-          <div class="cover-result-dot"></div>
           <div class="cover-result-text">정제 로직 → 서비스 신뢰도 확보</div>
         </div>
       </div>

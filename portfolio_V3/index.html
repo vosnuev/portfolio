@@ -179,23 +179,9 @@
     border-radius: 999px;
   }
 
-  /* MIDDLE ROW: projects (left) + experience (right) — full width divider */
+  /* MIDDLE: 4 project rows, each with project-left and exp-right */
   .cover-middle {
-    padding: 20px 0 16px;
-  }
-
-  /* Full-width horizontal divider line between project 01 and 02 */
-  .cover-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--sand);
-    margin-bottom: 16px;
-  }
-
-  .cover-projects-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    padding: 20px 0 0;
   }
 
   .cover-projects-title {
@@ -206,18 +192,31 @@
     margin-bottom: 12px;
   }
 
+  /* Each project row: project info | experience annotation */
+  .cover-project-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .cover-project-row:last-child {
+    border-bottom: none;
+  }
+
+  /* LEFT: project number + name + tech */
   .cover-project-item {
     display: flex;
     align-items: baseline;
     gap: 12px;
-    padding: 8px 0;
   }
 
   .cover-project-num {
     font-size: 18px;
     font-weight: 900;
     color: var(--accent);
-    width: 28px;
+    width: 32px;
     flex-shrink: 0;
     line-height: 1;
   }
@@ -227,9 +226,10 @@
     font-weight: 700;
     color: var(--text);
     line-height: 1.2;
+    white-space: nowrap;
   }
 
-  .cover-project-desc {
+  .cover-project-tech {
     font-size: 11px;
     font-weight: 400;
     color: var(--muted);
@@ -237,27 +237,22 @@
     line-height: 1.4;
   }
 
-  .cover-right {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
+  /* RIGHT: experience item — same baseline as project name */
   .cover-exp-item {
     display: flex;
-    gap: 12px;
     align-items: baseline;
+    gap: 10px;
   }
 
   .cover-exp-icon {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     background: var(--sand);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1;
     flex-shrink: 0;
   }
@@ -267,6 +262,7 @@
     font-weight: 700;
     color: var(--text);
     line-height: 1.2;
+    white-space: nowrap;
   }
 
   .cover-exp-text {
@@ -785,77 +781,72 @@
     </div>
 
     <div class="cover-middle">
-      <!-- Projects + Experience in two columns, aligned to same baseline -->
-      <div class="cover-projects-row">
-        <!-- LEFT: Projects list -->
-        <div>
-          <div class="cover-projects-title">PROJECTS</div>
+      <div class="cover-projects-title">PROJECTS</div>
 
-          <div class="cover-project-item">
-            <div class="cover-project-num">01</div>
-            <div class="cover-project-info">
-              <div class="cover-project-name">옆집 손주</div>
-              <div class="cover-project-desc">GraphRAG · LangGraph · Memgraph</div>
-            </div>
-          </div>
-
-          <!-- Full-width divider: separates 01+02 from 03+04 -->
-          <div class="cover-divider"></div>
-
-          <div class="cover-project-item">
-            <div class="cover-project-num">02</div>
-            <div class="cover-project-info">
-              <div class="cover-project-name">CEO 경영 시뮬레이터</div>
-              <div class="cover-project-desc">XGBoost · React 19</div>
-            </div>
-          </div>
-
-          <div class="cover-project-item">
-            <div class="cover-project-num">03</div>
-            <div class="cover-project-info">
-              <div class="cover-project-name">고객 이탈 예측</div>
-              <div class="cover-project-desc">38.9만건 크롤링 · AUC-ROC</div>
-            </div>
-          </div>
-
-          <div class="cover-project-item">
-            <div class="cover-project-num">04</div>
-            <div class="cover-project-info">
-              <div class="cover-project-name">주차장 데이터 정제</div>
-              <div class="cover-project-desc">Selenium · Pandas · MySQL</div>
-            </div>
+      <div class="cover-project-row">
+        <div class="cover-project-item">
+          <div class="cover-project-num">01</div>
+          <div>
+            <div class="cover-project-name">옆집 손주</div>
+            <div class="cover-project-tech">GraphRAG · LangGraph · Memgraph</div>
           </div>
         </div>
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">⚙</div>
+          <div>
+            <div class="cover-exp-label">RAG End-to-End 구축</div>
+            <div class="cover-exp-text">Embedding, Hybrid Search, Prompt Engineering</div>
+          </div>
+        </div>
+      </div>
 
-        <!-- RIGHT: Experience items — aligned to same text baseline as project names -->
-        <div class="cover-right">
-          <div class="cover-exp-item">
-            <div class="cover-exp-icon">⚙</div>
-            <div>
-              <div class="cover-exp-label">RAG End-to-End 구축</div>
-              <div class="cover-exp-text">Embedding, Hybrid Search, Prompt Engineering</div>
-            </div>
+      <div class="cover-project-row">
+        <div class="cover-project-item">
+          <div class="cover-project-num">02</div>
+          <div>
+            <div class="cover-project-name">CEO 경영 시뮬레이터</div>
+            <div class="cover-project-tech">XGBoost · React 19</div>
           </div>
-          <div class="cover-exp-item">
-            <div class="cover-exp-icon">◈</div>
-            <div>
-              <div class="cover-exp-label">Python 데이터 파이프라인</div>
-              <div class="cover-exp-text">Pandas, Selenium, ETL/ELT 설계</div>
-            </div>
+        </div>
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">◈</div>
+          <div>
+            <div class="cover-exp-label">Python 데이터 파이프라인</div>
+            <div class="cover-exp-text">Pandas, Selenium, ETL/ELT 설계</div>
           </div>
-          <div class="cover-exp-item">
-            <div class="cover-exp-icon">☁</div>
-            <div>
-              <div class="cover-exp-label">클라우드 + 인프라</div>
-              <div class="cover-exp-text">AWS (EC2, S3, Lambda), Firebase, Docker</div>
-            </div>
+        </div>
+      </div>
+
+      <div class="cover-project-row">
+        <div class="cover-project-item">
+          <div class="cover-project-num">03</div>
+          <div>
+            <div class="cover-project-name">고객 이탈 예측</div>
+            <div class="cover-project-tech">38.9만건 크롤링 · AUC-ROC</div>
           </div>
-          <div class="cover-exp-item">
-            <div class="cover-exp-icon">◉</div>
-            <div>
-              <div class="cover-exp-label">ML 모델링</div>
-              <div class="cover-exp-text">scikit-learn, XGBoost, EDA, 모델 평가</div>
-            </div>
+        </div>
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">☁</div>
+          <div>
+            <div class="cover-exp-label">클라우드 + 인프라</div>
+            <div class="cover-exp-text">AWS (EC2, S3, Lambda), Firebase, Docker</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-project-row">
+        <div class="cover-project-item">
+          <div class="cover-project-num">04</div>
+          <div>
+            <div class="cover-project-name">주차장 데이터 정제</div>
+            <div class="cover-project-tech">Selenium · Pandas · MySQL</div>
+          </div>
+        </div>
+        <div class="cover-exp-item">
+          <div class="cover-exp-icon">◉</div>
+          <div>
+            <div class="cover-exp-label">ML 모델링</div>
+            <div class="cover-exp-text">scikit-learn, XGBoost, EDA, 모델 평가</div>
           </div>
         </div>
       </div>

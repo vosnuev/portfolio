@@ -192,13 +192,14 @@
     margin-bottom: 12px;
   }
 
-  /* Each project row: project info | experience annotation */
+  /* Each project row: project info | experience annotation | result badge */
   .cover-project-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 0;
     padding: 10px 0;
     border-bottom: 1px solid var(--sand);
+    align-items: center;
   }
 
   .cover-project-row:last-child {
@@ -242,6 +243,29 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
+  }
+
+  /* RESULT badge — circular */
+  .cover-result-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .cover-result-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .cover-result-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
   }
 
   .cover-exp-icon {
@@ -798,6 +822,10 @@
             <div class="cover-exp-text">Embedding, Hybrid Search, Prompt Engineering</div>
           </div>
         </div>
+        <div class="cover-result-badge">
+          <div class="cover-result-dot"></div>
+          <div class="cover-result-text">RAGAS 0.89 / 법률 이해도 40%↑</div>
+        </div>
       </div>
 
       <div class="cover-project-row">
@@ -814,6 +842,10 @@
             <div class="cover-exp-label">Python 데이터 파이프라인</div>
             <div class="cover-exp-text">Pandas, Selenium, ETL/ELT 설계</div>
           </div>
+        </div>
+        <div class="cover-result-badge">
+          <div class="cover-result-dot"></div>
+          <div class="cover-result-text">200명+ 체험 / 이해도 30%↑</div>
         </div>
       </div>
 
@@ -832,6 +864,10 @@
             <div class="cover-exp-text">AWS (EC2, S3, Lambda), Firebase, Docker</div>
           </div>
         </div>
+        <div class="cover-result-badge">
+          <div class="cover-result-dot"></div>
+          <div class="cover-result-text">인과관계 도출 / 피처 엔지니어링</div>
+        </div>
       </div>
 
       <div class="cover-project-row">
@@ -848,6 +884,10 @@
             <div class="cover-exp-label">ML 모델링</div>
             <div class="cover-exp-text">scikit-learn, XGBoost, EDA, 모델 평가</div>
           </div>
+        </div>
+        <div class="cover-result-badge">
+          <div class="cover-result-dot"></div>
+          <div class="cover-result-text">정제 로직 → 서비스 신뢰도 확보</div>
         </div>
       </div>
     </div>

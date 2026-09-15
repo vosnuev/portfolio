@@ -1,0 +1,22 @@
+[
+  {
+    "file": "rody-home.jpg",
+    "source": "job/03_포트폴리오/이미지/작업본/screenshots/2026-07-24_1310.jpg",
+    "description": "옆집손주/로디 실제 서비스 랜딩 화면"
+  },
+  {
+    "file": "rody-consultation.jpg",
+    "source": "job/03_포트폴리오/이미지/작업본/screenshots/2026-07-24_1632_whale2.jpg",
+    "description": "옆집손주/로디 실제 상담 및 신청 절차 화면"
+  },
+  {
+    "file": "parking-erd.png",
+    "source": "SKN28-1st-2team/최종ERD.png",
+    "description": "1차 주차장 프로젝트 원본 ERD"
+  },
+  {
+    "file": "agent-backend.png",
+    "source": "SKN28-4th-1Team/presentation/final_diagram_images/backend_simplified.png",
+    "description": "4차 Agent backend 원본 아키텍처"
+  }
+]

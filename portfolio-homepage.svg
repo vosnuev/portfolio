@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="2200" viewBox="0 0 1440 2200">
+  <!-- Lunacy 편집용 하이파이 홈페이지 시안: 모든 그룹과 텍스트는 개별 수정 가능 -->
+  <defs>
+    <style>
+      .cream{fill:#f7f4d5}.dark{fill:#0a3323}.moss{fill:#839958}.rose{fill:#d3968c}.teal{fill:#105666}.ink{fill:#183b2b}.muted{fill:#637652}.label{font:600 16px Arial,sans-serif;letter-spacing:2px}.h1{font:700 72px Arial,sans-serif;letter-spacing:-3px}.h2{font:700 48px Arial,sans-serif;letter-spacing:-2px}.h3{font:700 27px Arial,sans-serif}.body{font:400 23px Arial,sans-serif}.small{font:400 16px Arial,sans-serif}.white{fill:#f7f4d5}
+    </style>
+  </defs>
+  <rect width="1440" height="2200" class="cream"/>
+  <!-- 헤더 -->
+  <g id="homepage-header">
+    <rect x="56" y="34" width="1328" height="72" rx="36" class="dark"/>
+    <text x="90" y="80" class="h3 white">HY<span class="moss">／</span></text>
+    <text x="1030" y="77" class="small white">WORK 04　 ABOUT　 CONTACT ↗</text>
+  </g>
+  <!-- Hero -->
+  <g id="homepage-hero">
+    <text x="76" y="195" class="label moss">JEON HAYOUNG · APPLIED AI ENGINEER</text>
+    <text x="76" y="320" class="h1 dark">사용자의 불편을</text><text x="76" y="402" class="h1 dark">문제로 정의하고,</text><text x="76" y="484" class="h1 moss">기능으로 개선하며,</text><text x="76" y="566" class="h1 dark">끝까지 검증하는 전하영.</text>
+    <text x="80" y="650" class="body muted">모델 평가부터 Agent와 API, 사용자 화면까지 연결합니다.</text>
+    <rect x="80" y="712" width="260" height="64" rx="32" class="dark"/><text x="116" y="753" class="small white">프로젝트 살펴보기　↗</text>
+    <rect x="950" y="178" width="330" height="570" rx="165" class="dark"/>
+    <text x="1020" y="255" class="label white">HOW I BUILD</text><circle cx="1115" cy="420" r="122" fill="none" stroke="#839958" stroke-width="3"/><circle cx="1115" cy="420" r="76" fill="none" stroke="#d3968c" stroke-width="2" stroke-dasharray="8 9"/><text x="1043" y="430" class="body white">why → how</text><text x="1020" y="600" class="small white">01 문제를 좁히고</text><text x="1020" y="632" class="small white">02 판단을 구현하고</text><text x="1020" y="664" class="small white">03 결과로 확인합니다</text>
+  </g>
+  <line x1="76" y1="850" x2="1364" y2="850" stroke="#0a3323" stroke-opacity=".2"/>
+  <!-- 프로젝트 섹션 -->
+  <g id="homepage-projects">
+    <text x="76" y="925" class="label moss">SELECTED WORK · 01</text><text x="76" y="1000" class="h2 dark">만들고, 확인한 것들.</text><text x="1080" y="990" class="body muted">네 개의 프로젝트.<tspan x="1080" dy="32">각기 다른 문제와 선택.</tspan></text>
+    <g id="project-card-cozy"><rect x="76" y="1060" width="295" height="470" rx="24" fill="#e3e7c9" stroke="#0a3323" stroke-width="2"/><text x="100" y="1105" class="label dark">01 · FINAL</text><text x="100" y="1170" class="h3 dark">COZY</text><text x="100" y="1210" class="body ink">체형 기반 패션 추천</text><rect x="100" y="1260" width="247" height="145" rx="18" class="moss"/><text x="125" y="1345" class="h2 dark" font-size="34">1.537 cm</text><text x="100" y="1460" class="small muted">측정 정의 교정 후 MAE</text></g>
+    <g id="project-card-agent"><rect x="400" y="1095" width="295" height="435" rx="24" class="dark"/><text x="424" y="1140" class="label white">02 · 4TH</text><text x="424" y="1205" class="h3 white">옆집손주</text><text x="424" y="1245" class="body white">복지·법령 상담 Agent</text><rect x="424" y="1295" width="247" height="110" rx="18" fill="#214533"/><text x="449" y="1360" class="h3 white">360 문항 평가</text><text x="424" y="1460" class="small" fill="#c4d39e">오답 유형과 MCP 계약 검증</text></g>
+    <g id="project-card-ceo"><rect x="724" y="1060" width="295" height="470" rx="24" fill="#e3e7c9" stroke="#0a3323" stroke-width="2"/><text x="748" y="1105" class="label dark">03 · 2ND</text><text x="748" y="1170" class="h3 dark">CEO</text><text x="748" y="1210" class="body ink">고객 이탈 예측</text><rect x="748" y="1260" width="247" height="145" rx="18" class="rose"/><text x="773" y="1345" class="h2 dark" font-size="34">92.59%</text><text x="748" y="1460" class="small muted">개인 XGBoost 실험 Recall</text></g>
+    <g id="project-card-parking"><rect x="1048" y="1095" width="295" height="435" rx="24" fill="#e3e7c9" stroke="#0a3323" stroke-width="2"/><text x="1072" y="1140" class="label dark">04 · 1ST</text><text x="1072" y="1205" class="h3 dark">주차장</text><text x="1072" y="1245" class="body ink">주소 기반 데이터 수집</text><rect x="1072" y="1295" width="247" height="110" rx="18" class="teal"/><text x="1097" y="1360" class="h3 white">34개 항목 검토</text><text x="1072" y="1460" class="small muted">제약 확인 후 기능 범위 조정</text></g>
+  </g>
+  <!-- About / 출결 -->
+  <g id="homepage-about">
+    <rect x="56" y="1640" width="1328" height="390" rx="30" fill="#eeeddb"/><text x="96" y="1710" class="label moss">ABOUT ME · 02</text><text x="96" y="1785" class="h2 dark">교실에서 시작된 개발의 이유.</text><text x="96" y="1845" class="body muted">교사 4년 동안 반복되는 출결 전달 누락을 보고,</text><text x="96" y="1880" class="body muted">학부모 입력 → 교사 화면 공유 웹앱으로 흐름을 바꿨습니다.</text><rect x="900" y="1700" width="400" height="240" rx="22" class="cream" stroke="#839958" stroke-width="2"/><text x="940" y="1750" class="label teal">FIRST REAL-WORLD SOLUTION</text><text x="940" y="1845" class="h2 dark">80% → 5%</text><text x="940" y="1890" class="small muted">출결 정보 전달 누락률</text>
+  </g>
+  <!-- Contact -->
+  <g id="homepage-contact"><rect x="0" y="2110" width="1440" height="90" class="dark"/><text x="76" y="2165" class="small white">사용자가 겪는 문제를 함께 풀고 싶습니다.</text><text x="1110" y="2165" class="small" fill="#d3968c">vosnuevo@gmail.com　↗</text></g>
+</svg>
